@@ -1,0 +1,9 @@
+django==5.0.4
+djangorestframework
+pyyaml 
+Requests
+django-cors-headers==3.9.0
+celery==5.3.5 
+drf_yasg
+poetry
+setuptools 
