@@ -36,4 +36,6 @@ apply-migrations:
 		poetry run python manage.py migrate
 		poetry run python manage.py runserver
 
-
+.PHONY: runserver9000
+runserver9000:
+	python manage.py runserver 0.0.0.0:9000
