@@ -2,7 +2,7 @@ amqp==5.2.0
 asgiref==3.8.1
 billiard==4.2.0
 build==1.2.1
-CacheControl==0.14.0
+CacheControl==0.14. 
 celery==5.3.5
 certifi==2024.2.2
 charset-normalizer==3.3.2
