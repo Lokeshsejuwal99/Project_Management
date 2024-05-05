@@ -3,7 +3,7 @@ from django.db import models
 from datetime import datetime 
 # Create your models here.
 
-class Employee_assigned(models.Model):
+class Employee_assigned_Task(models.Model):
     Employee_id = models.IntegerField()
     Employee_name = models.CharField(max_length=30)
     Employee_email = models.EmailField(max_length=254)
@@ -14,7 +14,7 @@ class Employee_assigned(models.Model):
         return self.Employee_name
     
 
-class Inventory(models.Model):
+class Inventory_Task(models.Model):
     Inventory_size = (
         ("Small", "Small"),
         ("Medium", "Medium"),
@@ -33,7 +33,7 @@ class Inventory(models.Model):
         return self.Name
 
 
-class Equipments(models.Model):
+class Equipments_Task(models.Model):
     Equipment_condition = (
         ("New", "New"),
         ("Used", "Used"),
@@ -46,7 +46,7 @@ class Equipments(models.Model):
     Description = models.CharField(max_length=100)
     Quantity = models.IntegerField(default=1)
     Condition = models.CharField(max_length=20, choices=Equipment_condition)
-    Assigned_to = models.ManyToManyField(Employee_assigned)
+    Assigned_to = models.ManyToManyField(Employee_assigned_Task, blank=True)
     
     def __str__(self):
         return self.Equipment_name
