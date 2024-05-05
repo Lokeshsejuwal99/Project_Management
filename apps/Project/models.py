@@ -59,6 +59,7 @@ class ProjectTag(models.Model):
         return self.Name
 
 class Project(models.Model):
+    
     Priority = (
     ("Low", "Low"),
     ("Medium", "Medium"),
