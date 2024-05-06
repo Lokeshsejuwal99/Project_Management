@@ -48,4 +48,4 @@ class Equipments(models.Model):
     Assigned_to = models.ManyToManyField(Employee_assigned)
     
     def __str__(self):
-        return self.Equipment_name
+        return self.Equipment_name  

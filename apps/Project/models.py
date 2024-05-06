@@ -1,6 +1,8 @@
 from datetime import timedelta
 from django.db import models
 from datetime import datetime 
+from ..Resource.models import Inventory, Equipments, Employee_assigned
+from apps.Resource.models import Inventory, Equipments, Employee_assigned
 # Create your models here.
 
     
@@ -12,6 +14,8 @@ class ProjectTag(models.Model):
 
 class Project(models.Model):
     
+    '''Models to represent a project plannigs.'''
+
     Priority = (
     ("Low", "Low"),
     ("Medium", "Medium"),
@@ -34,9 +38,9 @@ class Project(models.Model):
     Start_date = models.DateField(auto_now_add=True)
     End_date = models.DateField()
     Priority = models.CharField(max_length=20, choices=Priority)
-    Inventory = models.ManyToManyField("Resource.Inventory")
-    Equipments = models.ManyToManyField("Resource.Equipments")
-    Assigned_members = models.ManyToManyField("Resource.Employee_assigned")
+    Inventory = models.ManyToManyField('Resource.Inventory', related_name='projects')
+    Equipments = models.ManyToManyField('Resource.Equipments', related_name='projects')
+    Assigned_members = models.ManyToManyField('Resource.Employee_assigned', related_name='projects')
     Status = models.CharField(max_length=20, choices=Status)
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
 

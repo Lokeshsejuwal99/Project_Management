@@ -39,3 +39,8 @@ apply-migrations:
 .PHONY: runserver9000
 runserver9000:
 	python manage.py runserver 0.0.0.0:9000
+
+# .PHONY: activateenv
+# activateenv:
+#     cmd /c ". env\Scripts\activate"
+
