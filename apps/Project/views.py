@@ -2,7 +2,8 @@ from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from Project_main.pagination import CustomPagination
-from apps.Project.models import Project, ProjectTag, MileStone, Employee_assigned, Inventory, Equipments
+from apps.Project.models import Project, ProjectTag, MileStone
+from apps.Resource.models import  Employee_assigned, Inventory, Equipments
 from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, InventorySerializer, EmployeesSerializer, EquipementsTSerializer
 
 # Create your views here.

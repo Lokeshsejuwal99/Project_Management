@@ -1,6 +1,7 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
-from apps.Project.models import Project, ProjectTag, MileStone, Employee_assigned, Equipments, Inventory
+from apps.Project.models import Project, ProjectTag, MileStone
+from apps.Resource.models import Employee_assigned, Equipments, Inventory
 
 class EmployeesSerializer(ModelSerializer):
     class Meta:
