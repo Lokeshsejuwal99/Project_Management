@@ -18,13 +18,13 @@ permission_classes=(permissions.AllowAny, ),
 )
 
 urlpatterns = [
- path('project/', include('apps.Project.urls')),
- path('task/', include('apps.Task.urls')),
- path('resource/', include('apps.Resource.urls')),
- path('effort/', include('apps.Effort.urls')),
- path('report/', include('apps.Report.urls')),
- path('admin/', admin.site.urls),
- path('swagger/<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
- path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
- path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+ path('PM/project/', include('apps.Project.urls')),
+ path('PM/task/', include('apps.Task.urls')),
+ path('PM/resource/', include('apps.Resource.urls')),
+ path('PM/effort/', include('apps.Effort.urls')),
+ path('PM/report/', include('apps.Report.urls')),
+ path('PM/admin/', admin.site.urls),
+ path('PM/swagger/<format>/', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+ path('PM/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+ path('PM/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
 ]

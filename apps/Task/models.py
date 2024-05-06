@@ -70,13 +70,13 @@ class Task(models.Model):
 
     project = models.ForeignKey('Project.Project', on_delete=models.CASCADE)
     Name = models.CharField(max_length=30)
-    Description = models.CharField(max_length=100)
+    Description = models.CharField(max_length=300)
     Start_date = models.DateField(auto_now_add=True)
     End_date = models.DateField()
     Priority = models.CharField(max_length=20, choices=Priority)
-    Inventory = models.ManyToManyField(Inventory)
-    Equipments = models.ManyToManyField(Equipments)
-    Assigned_members = models.ManyToManyField(Employee_assigned)
+    Inventory = models.ManyToManyField(Inventory_Task)
+    Equipments = models.ManyToManyField(Equipments_Task)
+    Assigned_members = models.ManyToManyField(Employee_assigned_Task)
     Status = models.CharField(max_length=20, choices=Status)
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
 
