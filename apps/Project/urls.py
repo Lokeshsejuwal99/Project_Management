@@ -10,7 +10,6 @@ router.register('employees', EmployeeViewSet, basename='employees')
 router.register('inventory', InventoryViewSet, basename='inventory')
 router.register('equipements', EquipementsViewSet, basename='equipements')
 
-
 urlpatterns = [
  path('', include(router.urls))
 ]

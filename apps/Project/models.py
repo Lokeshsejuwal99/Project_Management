@@ -38,9 +38,9 @@ class Project(models.Model):
     Start_date = models.DateField(auto_now_add=True)
     End_date = models.DateField()
     Priority = models.CharField(max_length=20, choices=Priority)
-    Inventory = models.ManyToManyField('Resource.Inventory', related_name='projects')
-    Equipments = models.ManyToManyField('Resource.Equipments', related_name='projects')
-    Assigned_members = models.ManyToManyField('Resource.Employee_assigned', related_name='projects')
+    Inventory = models.ManyToManyField('Resource.Inventory')
+    Equipments = models.ManyToManyField('Resource.Equipments')
+    Assigned_members = models.ManyToManyField('Resource.Employee_assigned')
     Status = models.CharField(max_length=20, choices=Status)
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
 

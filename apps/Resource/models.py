@@ -11,9 +11,7 @@ class Employee_assigned(models.Model):
     def __str__(self):
         return self.Employee_name
     
-
 class Inventory(models.Model):
-
     Inventory_size = (
         ("Small", "Small"),
         ("Medium", "Medium"),
