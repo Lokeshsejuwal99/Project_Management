@@ -3,7 +3,8 @@
 ignore = 
     ES01,
     E203,
-    F402
+    F402,
+    F401
 
 # Exclude files or directories from linting. 
 exclude = 

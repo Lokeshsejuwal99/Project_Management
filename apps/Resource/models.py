@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Employee_assigned(models.Model):
     Employee_id = models.IntegerField()
     Employee_name = models.CharField(max_length=30)
@@ -11,6 +13,7 @@ class Employee_assigned(models.Model):
     def __str__(self):
         return self.Employee_name
     
+
 class Inventory(models.Model):
     Inventory_size = (
         ("Small", "Small"),

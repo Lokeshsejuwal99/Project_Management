@@ -1,7 +1,6 @@
-from datetime import timedelta
 from django.db import models
-from datetime import datetime 
 # Create your models here.
+
 
 class Employee_assigned_Task(models.Model):
     Employee_id = models.IntegerField()
@@ -12,7 +11,7 @@ class Employee_assigned_Task(models.Model):
 
     def __str__(self):
         return self.Employee_name
-    
+
 
 class Inventory_Task(models.Model):
     Inventory_size = (
@@ -47,25 +46,24 @@ class Equipments_Task(models.Model):
     Quantity = models.IntegerField(default=1)
     Condition = models.CharField(max_length=20, choices=Equipment_condition)
     Assigned_to = models.ManyToManyField(Employee_assigned_Task, blank=True)
-    
     def __str__(self):
         return self.Equipment_name
 
 class Task(models.Model):
     Priority = (
-    ("Low", "Low"),
-    ("Medium", "Medium"),
-    ("High", "High"),
-    ("Urgent", "Urgent"),
+        ("Low", "Low"),
+        ("Medium", "Medium"),
+        ("High", "High"),
+        ("Urgent", "Urgent"),
     )
 
     Status = (
-    ("Not Started", "Not Started"),
-    ("In Progress", "In Progress"),
-    ("Completed", "Completed"),
-    ("On Hold", "On Hold"),
-    ("Cancelled", "Cancelled"),
-    ("Overdue", "Overdue"),
+        ("Not Started", "Not Started"),
+        ("In Progress", "In Progress"),
+        ("Completed", "Completed"),
+        ("On Hold", "On Hold"),
+        ("Cancelled", "Cancelled"),
+        ("Overdue", "Overdue"),
     )
 
     project = models.ForeignKey('Project.Project', on_delete=models.CASCADE)

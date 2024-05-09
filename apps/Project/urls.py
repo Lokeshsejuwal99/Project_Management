@@ -1,4 +1,4 @@
-from django.urls import path, include 
+from django.urls import path, include
 from apps.Project.views import ProjectViewSet, ProjectTagViewSet, MileStoneViewSet
 from rest_framework.routers import DefaultRouter
 
@@ -9,5 +9,5 @@ router.register('milestone', MileStoneViewSet, basename='milestone')
 
 
 urlpatterns = [
- path('', include(router.urls))
+   path('', include(router.urls))
 ]
