@@ -57,3 +57,5 @@ class MileStone(models.Model):
 
     def __str__(self):
         return self.Name
+    
+# this is fucking nice feature in vs code. I am in love with vs code mainly of it's single idle for all programming languages and it's customization. 
