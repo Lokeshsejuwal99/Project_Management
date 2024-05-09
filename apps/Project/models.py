@@ -47,7 +47,6 @@ class Project(models.Model):
     def __str__(self):
         return self.Name
 
-
 class MileStone(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     Name = models.CharField(max_length=30)
@@ -58,4 +57,3 @@ class MileStone(models.Model):
     def __str__(self):
         return self.Name
     
-# this is fucking nice feature in vs code. I am in love with vs code mainly of it's single idle for all programming languages and it's customization. 
