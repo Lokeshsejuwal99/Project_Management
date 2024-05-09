@@ -9,7 +9,7 @@ from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, Mi
 
 
 class ProjectTagViewSet(ModelViewSet):
-    queryset = ProjectTag.objects.all()
+    queryset = ProjectTag.objects.order_by('name')
     serializer_class = ProjectTagSerializer
     pagination_class = CustomPagination
 

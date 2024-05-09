@@ -3,9 +3,9 @@ from django.db import models
 
 
 class ProjectTag(models.Model):
-    Name = models.CharField(max_length=30)    
+    name = models.CharField(max_length=30)    
     def __str__(self):
-        return self.Name
+        return self.name
 
 
 class Project(models.Model):
