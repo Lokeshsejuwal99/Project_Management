@@ -119,3 +119,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # celery configuration
 CELERY_BROKER_URL = "amqp://guest:guest@localhost"
 CELERY_RESULT_BACKEND = "rpc://"
+
+NATS_SERVERS = ["nats://localhost:4222"]
