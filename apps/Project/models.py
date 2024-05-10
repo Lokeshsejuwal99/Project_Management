@@ -38,7 +38,8 @@ class Project(models.Model):
     Assigned_members = models.ManyToManyField('Resource.Employee_assigned')
     Status = models.CharField(max_length=20, choices=Status)
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
-
+    Milestones = models.ManyToManyField('MileStone', blank=True, related_name='projects')
+    
     def __str__(self):
         return self.Name
 
