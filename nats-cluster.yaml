@@ -1,18 +1,22 @@
-version: "3.5"
 services:
   nats:
     image: nats
     ports:
-      - "8222:8222"
-    command: "--cluster_name NATS --cluster nats://0.0.0.0:6222 --http_port 8222 "
+      - "8223:8222"  # Change the host port to 8223
+      - "8322:8222"  # Second port mapping
+    command: "--cluster_name NATS --cluster nats://0.0.0.0:6222 --http_port 8222"
     networks: ["nats"]
   nats-1:
     image: nats
+    ports:
+      - "8224:8222"  # Change the host port to 8224
     command: "--cluster_name NATS --cluster nats://0.0.0.0:6222 --routes=nats://ruser:T0pS3cr3t@nats:6222"
     networks: ["nats"]
     depends_on: ["nats"]
   nats-2:
     image: nats
+    ports:
+      - "8225:8222"  # Change the host port to 8225
     command: "--cluster_name NATS --cluster nats://0.0.0.0:6222 --routes=nats://ruser:T0pS3cr3t@nats:6222"
     networks: ["nats"]
     depends_on: ["nats"]
@@ -20,3 +24,4 @@ services:
 networks:
   nats:
     name: nats
+    external: true

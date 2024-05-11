@@ -31,6 +31,7 @@ kombu==5.3.7
 more-itertools==10.2.0
 msgpack==1.0.8
 nats-python==0.8.0
+nats-py==2.7.2
 packaging==24.0
 pexpect==4.9.0
 pkginfo==1.10.0
