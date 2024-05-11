@@ -30,7 +30,7 @@ async def run(loop):
     nc = NATS()
 
     try:
-        await nc.connect(servers=settings.NATS_SERVERS)
+        await nc.connect(servers=["nats://localhost:4222"])
 
         # Subscribe to the 'inventory.created' subject
         await nc.subscribe("inventory.created", cb=handle_inventory_created_event)

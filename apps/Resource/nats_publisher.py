@@ -1,12 +1,11 @@
 from nats.aio.client import Client as NATS
 import asyncio
-from django.conf import settings
 
 async def publish_inventory_created_event(inventory):
     nc = NATS()
 
     try:
-        await nc.connect(servers=settings.NATS_SERVERS)  # Update with your NATS server details
+        await nc.connect(servers=["nats://localhost:4222"])  # Update with your NATS server details
 
         subject = "inventory.created"
         # Example payload including all fields of the inventory model
