@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 import asyncio
 
@@ -16,7 +17,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
  "127.0.0.1",
- "elina.localhost.com"
+ "elina.localhost.com",
+ "localhost"
 ]
 
 
@@ -121,3 +123,11 @@ CELERY_BROKER_URL = "amqp://guest:guest@localhost"
 CELERY_RESULT_BACKEND = "rpc://"
 
 NATS_SERVERS = ["nats://localhost:4222"]
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+
+    os.path.join(BASE_DIR, '/static'),
+
+]
