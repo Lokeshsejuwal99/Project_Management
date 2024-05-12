@@ -9,6 +9,6 @@ async def publish_inventory_created_event(inventory):
         await nc.connect(servers=["nats://localhost:4222"]) 
         subject = "inventory.created"
         await nc.publish(subject, inventory)
-        print(f"Published inventory created event for inventory:")
+        print(f"Published inventory created event for inventory: {inventory}")
     finally:
         await nc.close()
