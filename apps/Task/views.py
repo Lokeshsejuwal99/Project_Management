@@ -5,6 +5,7 @@ from apps.Task.models import Task, Inventory_Task, Equipments_Task, Employee_ass
 
 # Create your views here.
 
+
 class EmployeeAssignedTaskViewSet(ModelViewSet):
     queryset = Employee_assigned_Task.objects.all()
     serializer_class = EmployeesTaskSerializer
