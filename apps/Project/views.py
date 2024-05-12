@@ -2,7 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 # from Project_main.pagination import CustomPagination
 from apps.Project.models import Project, ProjectTag, MileStone
 from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer
-from Resource.nats_publisher import publish_inventory_created_event
+from apps.Resource.publisher import publish_inventory_created_event
 
 # Create your views here.
 

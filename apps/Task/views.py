@@ -11,6 +11,8 @@ class EmployeeAssignedTaskViewSet(ModelViewSet):
     serializer_class = EmployeesTaskSerializer
     pagination_class = CustomPagination
 
+    
+
 
 class InventoryTaskViewSet(ModelViewSet):
     queryset = Inventory_Task.objects.all()
