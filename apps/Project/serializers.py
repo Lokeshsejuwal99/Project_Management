@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from apps.Project.models import Project, ProjectTag, MileStone
+from apps.Project.models import Project, ProjectTag, MileStone, Dependencies
 
 
 class ProjectTagSerializer(ModelSerializer):
@@ -17,4 +17,10 @@ class ProjectSerializer(ModelSerializer):
 class MileStoneSerializer(ModelSerializer):
     class Meta:
         model = MileStone
+        fields = "__all__"
+
+
+class DependenciesSerializer(ModelSerializer):
+    class Meta:
+        model = Dependencies
         fields = "__all__"

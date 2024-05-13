@@ -56,3 +56,4 @@ class Equipments(models.Model):
     
     def __str__(self):
         return self.Equipment_name
+

@@ -3,10 +3,10 @@ from rest_framework.routers import DefaultRouter
 from apps.Task.views import TaskViewSet, InventoryTaskViewSet, EquipmentsTaskViewSet, EmployeeAssignedTaskViewSet
 
 router = DefaultRouter()
-router.register('Tasks', TaskViewSet, basename='task')
-router.register('Employees_task', EmployeeAssignedTaskViewSet, basename='Employees-task')
-router.register('Equipements_task', EquipmentsTaskViewSet, basename='Equipements-task')
-router.register('Inventory', InventoryTaskViewSet, basename='inventory')
+router.register('tasks', TaskViewSet, basename='task')
+router.register('employees_task', EmployeeAssignedTaskViewSet, basename='employees-task')
+router.register('equipements_task', EquipmentsTaskViewSet, basename='equipements-task')
+router.register('inventory', InventoryTaskViewSet, basename='inventory')
 
 
 urlpatterns = [

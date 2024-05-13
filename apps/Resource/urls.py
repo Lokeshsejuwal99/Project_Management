@@ -3,9 +3,9 @@ from rest_framework.routers import DefaultRouter
 from .views import InventoryViewSet, EquipementsViewSet, EmployeeViewSet
 
 router = DefaultRouter()
-router.register('inventory', InventoryViewSet, basename='inventory')
-router.register('equipment', EquipementsViewSet, basename='equipment')
-router.register('employee', EmployeeViewSet, basename='employee')
+router.register('Inventory', InventoryViewSet, basename='Inventory')
+router.register('Equipment', EquipementsViewSet, basename='Equipment')
+router.register('Employee', EmployeeViewSet, basename='Employee')
 
 urlpatterns = [
     path('', include(router.urls))
