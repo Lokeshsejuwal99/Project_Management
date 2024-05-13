@@ -2,8 +2,9 @@ from nats.aio.client import Client as NATS
 import asyncio
 from django.conf import settings
 from Project.models import Project
-from Resource.models import Inventory 
+from Resource.models import Inventory
 # Import your Project model here
+
 
 async def handle_inventory_created_event(msg):
     subject = msg.subject
@@ -25,6 +26,7 @@ async def handle_inventory_created_event(msg):
     for project in projects:
         # Add your logic here to update the project based on the new inventory
         print(f"Updating project '{project.Name}' with new inventory '{inventory.Name}'")
+
 
 async def run(loop):
     nc = NATS()

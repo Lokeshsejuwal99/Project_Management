@@ -5,7 +5,7 @@ from rest_framework.viewsets import ModelViewSet
 from Project_main.pagination import CustomPagination
 from rest_framework.response import Response
 from rest_framework import status
-from .publisher import publish_inventory_created_event  
+from .publisher import publish_inventory_created_event
 import asyncio
 
 # Create your views here.
@@ -37,3 +37,4 @@ class EquipementsViewSet(ModelViewSet):
     queryset = Equipments.objects.all()
     serializer_class = EquipementsTSerializer
     pagination_class = CustomPagination
+    

@@ -1,4 +1,4 @@
-from django.urls import path, include 
+from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from apps.Task.views import TaskViewSet, InventoryTaskViewSet, EquipmentsTaskViewSet, EmployeeAssignedTaskViewSet
 
@@ -10,5 +10,5 @@ router.register('Inventory', InventoryTaskViewSet, basename='inventory')
 
 
 urlpatterns = [
- path('', include(router.urls))
+    path('', include(router.urls))
 ]

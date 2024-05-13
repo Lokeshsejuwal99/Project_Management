@@ -4,7 +4,9 @@ ignore =
     ES01,
     E203,
     F402,
-    F401
+    F401,
+    W293,
+    W292,
 
 # Exclude files or directories from linting. 
 exclude = 
@@ -15,7 +17,7 @@ exclude =
     env
 
 # Maximum line length 
-max-line-length = 100
+max-line-length = 130
 
 # Maximum McCabe complexity 
 max-complexity = 12 

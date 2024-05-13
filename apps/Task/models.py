@@ -46,8 +46,10 @@ class Equipments_Task(models.Model):
     Quantity = models.IntegerField(default=1)
     Condition = models.CharField(max_length=20, choices=Equipment_condition)
     Assigned_to = models.ManyToManyField(Employee_assigned_Task, blank=True)
+    
     def __str__(self):
         return self.Equipment_name
+
 
 class Task(models.Model):
     Priority = (

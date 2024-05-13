@@ -9,5 +9,5 @@ router.register('milestone', MileStoneViewSet, basename='milestone')
 
 
 urlpatterns = [
-   path('', include(router.urls))
+    path('', include(router.urls))
 ]

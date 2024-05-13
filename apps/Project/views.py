@@ -37,4 +37,3 @@ class MileStoneViewSet(ModelViewSet):
     queryset = MileStone.objects.all()
     serializer_class = MileStoneSerializer
     # pagination_class = CustomPagination
- 

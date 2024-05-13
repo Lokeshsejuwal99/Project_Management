@@ -3,6 +3,7 @@ from django.core.management.base import BaseCommand
 import asyncio
 from Project.nats_subscriber import handle_inventory_created_event
 
+
 class Command(BaseCommand):
     help = 'Run NATS subscriber to listen for inventory created events'
 

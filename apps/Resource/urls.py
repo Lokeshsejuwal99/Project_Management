@@ -8,5 +8,5 @@ router.register('equipment', EquipementsViewSet, basename='equipment')
 router.register('employee', EmployeeViewSet, basename='employee')
 
 urlpatterns = [
- path('', include(router.urls))
+    path('', include(router.urls))
 ]

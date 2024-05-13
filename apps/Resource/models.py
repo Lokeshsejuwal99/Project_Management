@@ -1,5 +1,5 @@
 from django.db import models
-from .publisher import publish_inventory_created_event  
+# from .publisher import publish_inventory_created_event
 
 # Create your models here.
 
@@ -32,12 +32,12 @@ class Inventory(models.Model):
 
     def __str__(self):
         return self.Name
-    
     # def save(self, *args, **kwargs):
     #     if not self.pk:
     #         # Publish event when a new inventory item is created
     #         publish_inventory_created_event(self)
     #     super().save(*args, **kwargs)
+
 
 class Equipments(models.Model):
     Equipment_condition = (
@@ -55,4 +55,4 @@ class Equipments(models.Model):
     Assigned_to = models.ManyToManyField(Employee_assigned)
     
     def __str__(self):
-        return self.Equipment_name  
+        return self.Equipment_name
