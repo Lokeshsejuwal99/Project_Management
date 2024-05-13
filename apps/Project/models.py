@@ -9,6 +9,8 @@ class ProjectTag(models.Model):
     def __str__(self):
         return self.name
 
+class File(models.Model):
+    file = models.FileField()
 
 class Project(models.Model):
     '''Models to represent a project plannigs.'''
@@ -42,9 +44,13 @@ class Project(models.Model):
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
     Milestones = models.ManyToManyField('MileStone', blank=True, related_name='projects')
     Dependencies = models.ManyToManyField('Dependencies', related_name='dependencies')
-    Files = MultiFileField()    
+    files = models.ManyToManyField(File)
+
     def __str__(self):
         return self.Name
+    
+
+
 
 
 class MileStone(models.Model):
