@@ -1,6 +1,5 @@
 from nats.aio.client import Client as NATS
 import asyncio
-from django.conf import settings
 from Project.models import Project
 from Resource.models import Inventory
 # Import your Project model here

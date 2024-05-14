@@ -5,7 +5,6 @@ from apps.Project.models import (
     ProjectTag,
     MileStone,
     Dependencies,
-    UploadedFile,
 )
 
 
@@ -27,34 +26,38 @@ class DependenciesSerializer(ModelSerializer):
         fields = "__all__"
 
 
-class FileSerializer(ModelSerializer):
-    class Meta:
-        model = UploadedFile
-        fields = ["project", "files"]
-
-
 class ProjectSerializer(ModelSerializer):
-    File = serializers.SerializerMethodField()
-
-    def get_photos(self, obj):
-        File = UploadedFile.objects.filter(project=obj)
-        return FileSerializer(File, many=True, read_only=False).data
-
     class Meta:
         model = Project
-        fields = [
-            "project_tag",
-            "Name",
-            "Description",
-            "Start_date",
-            "End_date",
-            "Priority",
-            "Inventory",
-            "Equipments",
-            "Assigned_members",
-            "Status",
-            "Last_updated",
-            "Milestones",
-            "Dependencies",
-            "File",
-        ]
+        fields = '__all__'
+
+
+# class FileSerializer(ModelSerializer):
+#     File = serializers.ListField(child=serializers.FileField())
+#     class Meta:
+#         model = UploadedFile
+#         fields = ('files', 'File')
+
+from rest_framework import serializers
+from .models import Project, ProductImage
+
+class ProductImageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProductImage
+        fields = ['image']
+
+class ProductSerializer(serializers.ModelSerializer):
+    images = ProductImageSerializer(many=True)
+
+    class Meta:
+        model = ProductImage
+        fields = ['project', 'images']
+
+    def create(self, validated_data):
+        uploaded_images = validated_data.pop("images")
+        product = Project.objects.create(**validated_data)
+
+        for image in uploaded_images:
+            ProductImage.objects.create(product=product, image=image)
+
+        return product

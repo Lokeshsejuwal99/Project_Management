@@ -67,7 +67,13 @@ class Dependencies(models.Model):
         return self.task_dependencies
 
 
-class UploadedFile(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, default=None)
-    files = models.FileField(upload_to='uploads/')
-    
+class ProductImage(models.Model):
+
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images')
+
+    image = models.ImageField(upload_to="products")
+
+
+    def __str__(self):
+
+        return "%s" % (self.product.name)
