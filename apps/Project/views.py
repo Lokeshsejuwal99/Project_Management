@@ -6,6 +6,7 @@ from apps.Resource.publisher import publish_inventory_created_event
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.viewsets import ViewSet
+from rest_framework.decorators import action
 # Create your views here.
 
 # Changeable Viewsets/Only for testing purposes
@@ -50,6 +51,25 @@ class ProjectViewSet(ModelViewSet):
     serializer_class = ProjectSerializer
     pagination_class = CustomPagination
 
+    def create(self, request, *args, **kwargs):
+        instance_data = request.data
+        data = {key: value for key, value in instance_data.items()}
+        serializer = self.get_serializer(data=data)
+        serializer.is_valid(raise_exception=True)
+        instance = serializer.save()
+
+        if request.FILES:
+            files = dict((request.FILES).lists()).get('files', None)
+            if files:
+                for file in files:
+                    files_data = {}
+                    files_data["blogs"] = instance.pk
+                    files_data["image"] = files
+                    files_serializer = FileSerializer(data=files_data)
+                    files_serializer.is_valid(raise_exception=True)
+                    files_serializer.save()
+
+        return Response(serializer.data)
 
     # @action(detail=True, methods=['post'])
     # def upload_file(self, request, pk=None):
@@ -72,17 +92,11 @@ class ProjectViewSet(ModelViewSet):
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class FileUploadView(ViewSet):
-    def create(self, request):
-        serializer = FileSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def upload_multiple_files(self, request):
-        serializer = FileSerializer(data=request.data.getlist('files'), many=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class FileUploadView(ViewSet):
+#     @action(detail=False, methods=['post'])
+#     def upload(self, request):
+#         serializer = FileSerializer(data=request.data)
+#         if serializer.is_valid():
+#             serializer.save()
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)  

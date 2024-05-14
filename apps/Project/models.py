@@ -9,10 +9,7 @@ class ProjectTag(models.Model):
     def __str__(self):
         return self.name
 
-class UploadedFile(models.Model):
-    file = models.FileField(upload_to='uploads/')
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-    
+
 class Project(models.Model):
     '''Models to represent a project plannigs.'''
 
@@ -68,4 +65,9 @@ class Dependencies(models.Model):
 
     def __int__(self):
         return self.task_dependencies
+
+
+class UploadedFile(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, default=None)
+    files = models.FileField(upload_to='uploads/')
     
