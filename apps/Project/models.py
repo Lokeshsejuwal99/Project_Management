@@ -9,10 +9,10 @@ class ProjectTag(models.Model):
     def __str__(self):
         return self.name
 
-class File(models.Model):
-    project = models.ForeignKey('Project', on_delete=models.CASCADE, default=None)
-    file = models.FileField(upload_to='project_files/', default=None, blank=True)
-
+class UploadedFile(models.Model):
+    file = models.FileField(upload_to='uploads/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    
 class Project(models.Model):
     '''Models to represent a project plannigs.'''
 
@@ -45,7 +45,6 @@ class Project(models.Model):
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
     Milestones = models.ManyToManyField('MileStone', blank=True, related_name='projects')
     Dependencies = models.ManyToManyField('Dependencies', related_name='dependencies')
-    files = models.ManyToManyField(to=File, related_name='files', blank=True)
     
     def __str__(self):
         return self.Name
