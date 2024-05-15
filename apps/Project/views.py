@@ -1,19 +1,11 @@
 from rest_framework.viewsets import ModelViewSet
 # from Project_main.pagination import CustomPagination
 from apps.Project.models import Project, ProjectTag, MileStone, Dependencies
-from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer, FileSerializer, MyModelSerializer
+from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer
 from apps.Resource.publisher import publish_inventory_created_event
-from rest_framework.response import Response
-from rest_framework import status
-from rest_framework import viewsets
-from rest_framework.decorators import action
-from rest_framework import generics, parsers
-from rest_framework.generics import CreateAPIView
-from rest_framework.serializers import ModelSerializer
 
-from rest_framework.parsers import MultiPartParser, FormParser
 
-from .models import Project, File
+from .models import Project
 
 # Create your views here.
 
@@ -59,22 +51,3 @@ class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     # pagination_class = CustomPagination
-
-
-# class FileUploadViewSet(generics.CreateAPIView):
-#     parser_classes = [parsers.MultiPartParser, parsers.FormParser]
-#     serializer_class = FileSerializer
-
-#     def create(self, request, *args, **kwargs):
-#         serializer = self.get_serializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         Files = serializer.save()
-#         return Response(FileSerializer(Files).data)
-    
-class MyModelViewSet(viewsets.ModelViewSet):
-    queryset = Project.objects.all()
-    serializer_class = MyModelSerializer
-
-class FileViewSet(viewsets.ModelViewSet):
-    queryset = File.objects.all()
-    serializer_class = FileSerializer

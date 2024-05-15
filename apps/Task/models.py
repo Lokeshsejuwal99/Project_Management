@@ -51,7 +51,7 @@ class Equipments_Task(models.Model):
         return self.Equipment_name
 
 
-class  Task(models.Model):
+class Task(models.Model):
     Priority = (
         ("Low", "Low"),
         ("Medium", "Medium"),
