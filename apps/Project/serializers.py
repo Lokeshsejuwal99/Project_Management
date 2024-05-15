@@ -5,6 +5,7 @@ from apps.Project.models import (
     ProjectTag,
     MileStone,
     Dependencies,
+    File
 )
 
 
@@ -38,26 +39,51 @@ class ProjectSerializer(ModelSerializer):
 #         model = UploadedFile
 #         fields = ('files', 'File')
 
+# from rest_framework import serializers
+# from .models import Project, ProductImage
+
+# class ProductImageSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = ProductImage
+#         fields = ['image']
+
+# class ProductSerializer(serializers.ModelSerializer):
+#     images = ProductImageSerializer(many=True)
+
+#     class Meta:
+#         model = ProductImage
+#         fields = ['project', 'images']
+
+#     def create(self, validated_data):
+#         uploaded_images = validated_data.pop("images")
+#         product = Project.objects.create(**validated_data)
+
+#         for image in uploaded_images:
+#             ProductImage.objects.create(product=product, image=image)
+
+#         return product
+
 from rest_framework import serializers
-from .models import Project, ProductImage
 
-class ProductImageSerializer(serializers.ModelSerializer):
+class FileField(serializers.FileField):
+    def to_representation(self, value):
+        if value:
+            return value.url
+        return None
+
+    def to_internal_value(self, data):
+        return data
+
+class FileSerializer(serializers.ModelSerializer):
+    file = FileField()
+
     class Meta:
-        model = ProductImage
-        fields = ['image']
+        model = File
+        fields = ('id', 'project', 'file')
 
-class ProductSerializer(serializers.ModelSerializer):
-    images = ProductImageSerializer(many=True)
+class MyModelSerializer(serializers.ModelSerializer):
+    files = FileSerializer(many=True, read_only=True)
 
     class Meta:
-        model = ProductImage
-        fields = ['project', 'images']
-
-    def create(self, validated_data):
-        uploaded_images = validated_data.pop("images")
-        product = Project.objects.create(**validated_data)
-
-        for image in uploaded_images:
-            ProductImage.objects.create(product=product, image=image)
-
-        return product
+        model = Project
+        fields = ('id', 'other_fields', 'files')

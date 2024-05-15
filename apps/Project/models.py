@@ -50,7 +50,7 @@ class Project(models.Model):
 
 
 class MileStone(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    # project = models.ForeignKey(Project, on_delete=models.CASCADE)
     Name = models.CharField(max_length=30)
     Description = models.CharField(max_length=100)
     Start_date = models.DateField(auto_now_add=True)
@@ -69,9 +69,6 @@ class Dependencies(models.Model):
         return self.task_dependencies
 
 
-class ProductImage(models.Model):
-    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images')
-    image = models.ImageField(upload_to="products")
-
-    def __str__(self):
-        return "%s" % (self.product.name)
+class File(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    file = models.FileField(upload_to='uploads/')
