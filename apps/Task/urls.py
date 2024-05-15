@@ -5,7 +5,7 @@ from apps.Task.views import TaskViewSet, InventoryTaskViewSet, EquipmentsTaskVie
 router = DefaultRouter()
 router.register('tasks', TaskViewSet, basename='task')
 router.register('employees_task', EmployeeAssignedTaskViewSet, basename='employees-task')
-router.register('equipements_task', EquipmentsTaskViewSet, basename='equipements-task')
+router.register('equipments_task', EquipmentsTaskViewSet, basename='equipments-task')
 router.register('inventory', InventoryTaskViewSet, basename='inventory')
 
 

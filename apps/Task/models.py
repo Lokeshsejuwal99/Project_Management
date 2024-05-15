@@ -51,7 +51,7 @@ class Equipments_Task(models.Model):
         return self.Equipment_name
 
 
-class Task(models.Model):
+class  Task(models.Model):
     Priority = (
         ("Low", "Low"),
         ("Medium", "Medium"),
@@ -74,11 +74,12 @@ class Task(models.Model):
     Start_date = models.DateField(auto_now_add=True)
     End_date = models.DateField()
     Priority = models.CharField(max_length=20, choices=Priority)
-    Inventory = models.ManyToManyField(Inventory_Task)
-    Equipments = models.ManyToManyField(Equipments_Task)
+    Inventory = models.ManyToManyField('Resource.Inventory')
+    Equipments = models.ManyToManyField('Resource.Equipments')
     Assigned_members = models.ManyToManyField(Employee_assigned_Task)
     Status = models.CharField(max_length=20, choices=Status)
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
         return self.Name
+

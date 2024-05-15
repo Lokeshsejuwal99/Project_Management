@@ -1,25 +1,25 @@
-from rest_framework.pagination import PageNumberPagination
-from rest_framework.response import Response
+# from rest_framework.pagination import PageNumberPagination
+# from rest_framework.response import Response
 
-default_page = 1
-default_page_size = 10
-
-
-class CustomPagination(PageNumberPagination):
-    page_size = default_page_size
-    page_size_query_param = 'page_size'
+# default_page = 1
+# default_page_size = 10
 
 
-def get_paginated_response(self, data):
-    return Response(
-        {
-            "links": {
-                "next": self.get_next_link(),
-                "previous": self.get_previous_link(),
-            },
-            "total": self.page.paginator.count,
-            "page": int(self.request.GET.get("page", default_page)),
-            "page_size": int(self.request.GET.get("page_size", default_page_size)),
-            "result": data,
-        }
-    )
+# class CustomPagination(PageNumberPagination):
+#     page_size = default_page_size
+#     page_size_query_param = 'page_size'
+
+
+# def get_paginated_response(self, data):
+#     return Response(
+#         {
+#             "links": {
+#                 "next": self.get_next_link(),
+#                 "previous": self.get_previous_link(),
+#             },
+#             "total": self.page.paginator.count,
+#             "page": int(self.request.GET.get("page", default_page)),
+#             "page_size": int(self.request.GET.get("page_size", default_page_size)),
+#             "result": data,
+#         }
+#     )

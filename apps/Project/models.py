@@ -1,5 +1,6 @@
 from django.db import models
 from multiupload.fields import MultiFileField
+
 # Create your models here.
 
 
@@ -40,8 +41,9 @@ class Project(models.Model):
     Assigned_members = models.ManyToManyField('Resource.Employee_assigned')
     Status = models.CharField(max_length=20, choices=Status)
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
-    Milestones = models.ManyToManyField('MileStone', blank=True, related_name='projects')
-    Dependencies = models.ManyToManyField('Dependencies', related_name='dependencies')
+    Milestones = models.ManyToManyField('Project.MileStone', blank=True, related_name='milestone')
+    Dependencies = models.ManyToManyField('Project.Dependencies', related_name='dependencies')
+    files = models.JSONField(default=list)
     
     def __str__(self):
         return self.Name
@@ -68,12 +70,8 @@ class Dependencies(models.Model):
 
 
 class ProductImage(models.Model):
-
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='images')
-
     image = models.ImageField(upload_to="products")
 
-
     def __str__(self):
-
         return "%s" % (self.product.name)
