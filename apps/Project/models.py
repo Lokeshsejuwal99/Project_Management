@@ -66,3 +66,10 @@ class Dependencies(models.Model):
 
     def __int__(self):
         return self.task_dependencies
+
+class File(models.Model):
+    name = models.CharField(max_length=49, null=False, blank=True)
+    one_file = models.FileField(upload_to='uploads/', null=False, blank=True)
+
+    def __str__(self):
+        return self.name
