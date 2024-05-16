@@ -1,6 +1,5 @@
 from django.db import models
 # from .publisher import publish_inventory_created_event
-
 # Create your models here.
 
 
@@ -57,3 +56,15 @@ class Equipments(models.Model):
     def __str__(self):
         return self.Equipment_name
 
+
+class Budget(models.Model):
+    pay_method = (
+        ("Bank", "Bank"), 
+        ("Check", "Check"), 
+        ("Cash", "Cash"), 
+        ("Credit Card", "Credit Card")
+    )
+    Amount = models.DecimalField(decimal_places=2, max_digits=100, null=False, blank=True)
+    Amount_in_words = models.CharField(max_length=400, null=False, blank=True)
+    Payment_method = models.CharField(max_length=100, choices=pay_method)
+    Date = models.DateTimeField(auto_now_add=True)

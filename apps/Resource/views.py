@@ -1,8 +1,8 @@
 from django.shortcuts import render
-from .models import Employee_assigned, Inventory, Equipments
-from .serializers import InventorySerializer, EmployeesSerializer, EquipementsTSerializer
+from .models import Employee_assigned, Inventory, Equipments, Budget
+from .serializers import InventorySerializer, EmployeesSerializer, EquipementsTSerializer, BudgetSerializer
 from rest_framework.viewsets import ModelViewSet
-# from Project_main.pagination import CustomPagination
+from Project_main.pagination import CustomPagination
 from rest_framework.response import Response
 from rest_framework import status
 from .publisher import publish_inventory_created_event
@@ -14,13 +14,13 @@ import asyncio
 class EmployeeViewSet(ModelViewSet):
     queryset = Employee_assigned.objects.all()
     serializer_class = EmployeesSerializer
-    # pagination_class = CustomPagination
+    pagination_class = CustomPagination
 
 
 class InventoryViewSet(ModelViewSet):
     queryset = Inventory.objects.all()
     serializer_class = InventorySerializer
-    # pagination_class = CustomPagination
+    pagination_class = CustomPagination
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -36,5 +36,9 @@ class InventoryViewSet(ModelViewSet):
 class EquipementsViewSet(ModelViewSet):
     queryset = Equipments.objects.all()
     serializer_class = EquipementsTSerializer
-    # pagination_class = CustomPagination
+    pagination_class = CustomPagination
     
+
+class BudgetViewSet(ModelViewSet):
+    queryset = Budget.objects.all()
+    serializer_class = BudgetSerializer

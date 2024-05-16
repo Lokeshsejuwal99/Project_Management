@@ -19,7 +19,7 @@ class Project(models.Model):
         ("Medium", "Medium"),
         ("High", "High"),
         ("Urgent", "Urgent"),
-    )
+    )    
 
     Status = (
         ("Not Started", "Not Started"),
@@ -32,7 +32,7 @@ class Project(models.Model):
 
     project_tag = models.ForeignKey(ProjectTag, on_delete=models.CASCADE)
     Name = models.CharField(max_length=30)
-    Description = models.CharField(max_length=100)
+    Description = models.CharField(max_length=700)
     Start_date = models.DateField(auto_now_add=True)
     End_date = models.DateField()
     Priority = models.CharField(max_length=20, choices=Priority)
@@ -60,16 +60,17 @@ class MileStone(models.Model):
 
 class Dependencies(models.Model): 
     # task_dependencies = models.ForeignKey('Task.Task', on_delete=models.CASCADE)
-    inventory_dependencies = models.ForeignKey('Resource.Inventory', on_delete=models.CASCADE)
-    equipment_dependencies = models.ForeignKey('Resource.Equipments', on_delete=models.CASCADE)
-    hr_dependencies = models.ForeignKey('Resource.Employee_assigned', on_delete=models.CASCADE)
+    Inventory_dependencies = models.ForeignKey('Resource.Inventory', on_delete=models.CASCADE)
+    Equipment_dependencies = models.ForeignKey('Resource.Equipments', on_delete=models.CASCADE)
+    HR_dependencies = models.ForeignKey('Resource.Employee_assigned', on_delete=models.CASCADE)
+    Buget_dependencies = models.ForeignKey('Resource.Budget', on_delete=models.CASCADE, null=True)
 
-    def __int__(self):
-        return self.task_dependencies
+    # def __int__(self):
+    #     return self.task_dependencies
 
 class File(models.Model):
-    name = models.CharField(max_length=49, null=False, blank=True)
-    one_file = models.FileField(upload_to='uploads/', null=False, blank=True)
+    Name = models.CharField(max_length=49, null=False, blank=True)
+    One_file = models.FileField(upload_to='uploads/', null=False, blank=True)
 
     def __str__(self):
-        return self.name
+        return self.Name
