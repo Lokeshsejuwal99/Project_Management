@@ -35,18 +35,17 @@ class ProjectSerializer(ModelSerializer):
 
 class FileSerializer(serializers.ModelSerializer):
     class Meta:
-        model = File  
+        model = File
         fields = '__all__'
 
 
 class FileListSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=50)
-    one_file = serializers.ListSerializer(child=FileSerializer())
+    one_file = serializers.ListField(child=serializers.FileField())
 
     def create(self, validated_data):
-        name = validated_data.pop('name')
-        files_data = validated_data.pop('one_file')
+        name = validated_data['name']
+        files_data = validated_data['one_file']
         for file_data in files_data:
-            File.objects.create(Name=name, One_file=file_data.get('one_file'))
+            File.objects.create(Name=name, One_file=file_data)
         return validated_data
-

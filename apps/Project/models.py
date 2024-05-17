@@ -43,11 +43,18 @@ class Project(models.Model):
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
     Milestones = models.ManyToManyField('Project.MileStone', blank=True, related_name='milestone')
     Dependencies = models.ManyToManyField('Project.Dependencies', related_name='dependencies')
-    file = models.FileField(default=None, blank=True, null=True)
-    
+    files = models.ManyToManyField('Project.File', related_name='projects')    
+
     def __str__(self):
         return self.Name
 
+
+class File(models.Model):
+    Name = models.CharField(max_length=49, null=False, blank=True)
+    One_file = models.FileField(upload_to='uploads/', null=False, blank=True)
+
+    def __str__(self):
+        return self.Name
 
 class MileStone(models.Model):
     Name = models.CharField(max_length=30)
@@ -67,10 +74,3 @@ class Dependencies(models.Model):
 
     # def __int__(self):
     #     return self.task_dependencies
-
-class File(models.Model):
-    Name = models.CharField(max_length=49, null=False, blank=True)
-    One_file = models.FileField(upload_to='uploads/', null=False, blank=True)
-
-    def __str__(self):
-        return self.Name
