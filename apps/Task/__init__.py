@@ -42,18 +42,36 @@
 
 # check_both(1,2,3, a=5, b=6, c=7)
 
-''' Using Decorator in python '''
+# ''' Using Decorator in python '''
 
-def logger(func):
- def wrapper(*args, **kwargs):
-  print(f'Expecting {func.__name__} with arguments of {args} and {kwargs}')
-  result = func(*args, **kwargs)
-  print(f'Expecting the  {func.__name__} returns result of {result}')
-  return result
- return wrapper
+# def logger(func):
+#  def wrapper(*args, **kwargs):
+#   print(f'Expecting {func.__name__} with arguments of {args} and {kwargs}')       
+#  return wrapper
 
-@logger
-def add(x, y, **kwargs):
- return x + y 
+# @logger
+# def add(x, y, **kwargs):
+#  return x + y 
 
-(add(5, 3, check=True, works=False, final='Kidding it works'))
+# (add(5, 3, check=True, works=False, final='Kidding it works'))
+
+# '''using Decoretor in python'''
+
+#  def lower_func(*args, **kwargs):
+#   print(f"Executing {func.__name__} and expect the result of args {args} and kwargs {kwargs}")
+#   result = func(*args, **kwargs)
+#   print(f"We are expecting the result of {result}")
+#   return result
+#  return lower_func
+
+# @upper_func
+# def add(x,y):
+#  return x + y
+# print(add(5,4))
+
+smth =  [
+ 
+  (2+3) * 4, 
+ (2+4)
+]
+print(smth)
