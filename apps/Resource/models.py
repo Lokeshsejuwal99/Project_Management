@@ -22,15 +22,20 @@ class Inventory(models.Model):
     )
 
     Name = models.CharField(max_length=30)
+    Description = models.TextField(null=True, blank=False)
+    Category = models.CharField(max_length=100, null=True, blank=False)
+    Size = models.CharField(max_length=30, choices=Inventory_size)
     Quantity = models.IntegerField()
-    size = models.CharField(max_length=30, choices=Inventory_size)
-    Client_name = models.CharField(max_length=20)
-    Address = models.CharField(max_length=30)
-    Phone = models.IntegerField()
-    Email = models.EmailField(max_length=254)
+    Unit_Price  = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=False)
+    Total_price = models.DecimalField(max_digits=10, decimal_places=2,null=True, blank=False)
+
+    def save(self, *args, **kwargs):
+        self.Total_price = self.Unit_Price * self.Quantity
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return self.Name
+
     # def save(self, *args, **kwargs):
     #     if not self.pk:
     #         # Publish event when a new inventory item is created
