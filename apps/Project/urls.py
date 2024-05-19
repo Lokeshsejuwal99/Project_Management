@@ -12,5 +12,5 @@ router.register('dependencies', DependenciesViewSet, basename='dependencies')
 urlpatterns = [
     path('', include(router.urls)),
     path('files/', views.FilesAPIView.as_view()),
-    path('details/', views.FilesAPIViewDetail.as_view())
+    path('files/<pk>/', views.FilesAPIViewDetail.as_view())
     ]

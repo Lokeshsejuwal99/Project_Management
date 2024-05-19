@@ -50,3 +50,4 @@ class FileListSerializer(serializers.Serializer):
             File.objects.create(Name=name, One_file=file_data)
         return validated_data
     
+ 
