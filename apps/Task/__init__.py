@@ -69,9 +69,9 @@
 #  return x + y
 # print(add(5,4))
 
-smth =  [
+# smth =  [
  
-  (2+3) * 4, 
- (2+4)
-]
-print(smth)
+#   (2+3) * 4, 
+#  (2+4)
+# ]
+# print(smth)
