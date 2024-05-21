@@ -12,7 +12,7 @@ class Employee_assigned(models.Model):
 
     def __str__(self):
         return self.Employee_name
-    
+
 
 class Inventory(models.Model):
     Inventory_size = (
@@ -27,6 +27,7 @@ class Inventory(models.Model):
     Size = models.CharField(max_length=30, choices=Inventory_size)
     Quantity = models.IntegerField()
     Unit_Price  = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=False)
+    Total_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=False)
 
     def save(self, *args, **kwargs):
         self.Total_price = self.Unit_Price * self.Quantity

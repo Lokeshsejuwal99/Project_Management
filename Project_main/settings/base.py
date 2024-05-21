@@ -17,7 +17,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     "127.0.0.1",
-    "elina.localhost.com",
     "localhost"
 ]
 
@@ -136,3 +135,9 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'Project_main.pagination.CustomPagination',  
+    'PAGE_SIZE': 10,
+}

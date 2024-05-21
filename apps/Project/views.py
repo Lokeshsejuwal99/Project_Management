@@ -23,24 +23,25 @@ class ProjectTagViewSet(ModelViewSet):
 
 
 class ProjectViewSet(ModelViewSet):
-    queryset = Project.objects.all()
+    queryset = Project.objects.all().order_by('Name')
     serializer_class = ProjectSerializer
+    pagination_class = CustomPagination
     
-    def perform_create(self, serializer):
-        # Triggered when a new project is created
-        instance = serializer.save()
-        # Publish event to NATS when a new project is created
-        publish_inventory_created_event(instance)
+    # def perform_create(self, serializer):
+    #     # Triggered when a new project is created
+    #     instance = serializer.save()
+    #     # Publish event to NATS when a new project is created
+    #     publish_inventory_created_event(instance)
 
-    def perform_update(self, serializer):
-        # Triggered when a project is updated
-        instance = serializer.save()
-        # Publish event to NATS when a project is updated
-        publish_inventory_created_event(instance)
+    # def perform_update(self, serializer):
+    #     # Triggered when a project is updated
+    #     instance = serializer.save()
+    #     # Publish event to NATS when a project is updated
+    #     publish_inventory_created_event(instance)
 
     
 class MileStoneViewSet(ModelViewSet):
-    queryset = MileStone.objects.all()
+    queryset = MileStone.objects.all().order_by('Name')
     serializer_class = MileStoneSerializer
     pagination_class = CustomPagination
 

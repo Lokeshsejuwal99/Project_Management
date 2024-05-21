@@ -19,7 +19,7 @@ class Project(models.Model):
         ("Medium", "Medium"),
         ("High", "High"),
         ("Urgent", "Urgent"),
-    )    
+    )
 
     Status = (
         ("Not Started", "Not Started"),
@@ -41,12 +41,15 @@ class Project(models.Model):
     Assigned_members = models.ManyToManyField('Resource.Employee_assigned')
     Status = models.CharField(max_length=20, choices=Status)
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
-    Milestones = models.ManyToManyField('Project.MileStone', blank=True, related_name='milestone')
-    Dependencies = models.ManyToManyField('Project.Dependencies', related_name='dependencies')
+    Milestones = models.ManyToManyField('Project.MileStone', blank=True)
+    Dependencies = models.ManyToManyField('Project.Dependencies')
     files = models.ManyToManyField('Project.File', related_name='projects')    
 
     def __str__(self):
         return self.Name
+
+    class Meta:
+        ordering = ['Name']
 
 
 class File(models.Model):
@@ -64,6 +67,9 @@ class MileStone(models.Model):
 
     def __str__(self):
         return self.Name
+    
+    class Meta:
+        ordering = ['Name']
 
 class Dependencies(models.Model): 
     # task_dependencies = models.ForeignKey('Task.Task', on_delete=models.CASCADE)

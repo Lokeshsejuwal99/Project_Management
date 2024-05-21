@@ -28,9 +28,19 @@ class DependenciesSerializer(ModelSerializer):
 
 
 class ProjectSerializer(ModelSerializer):
+    name = serializers.CharField(max_length=50)
+    one_file = serializers.ListField(child=serializers.FileField())
+
     class Meta:
-        model = Project
+        model = Project, File
         fields = '__all__'
+
+    def create(self, validated_data):
+        name = validated_data['name']
+        files_data = validated_data['one_file']
+        for file_data in files_data:
+            File.objects.create(Name=name, One_file=file_data)
+        return validated_data
 
 
 class FileSerializer(ModelSerializer):
