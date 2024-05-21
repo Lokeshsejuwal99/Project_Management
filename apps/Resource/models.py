@@ -54,9 +54,11 @@ class Equipments(models.Model):
     Equipement_id = models.IntegerField()
     Equipment_name = models.CharField(max_length=30)
     Description = models.CharField(max_length=100)
+    Unit_price = models.DecimalField(decimal_places=2, max_digits=30, null=True,blank=False)
     Quantity = models.IntegerField(default=1)
     Condition = models.CharField(max_length=20, choices=Equipment_condition)
     Assigned_to = models.ManyToManyField(Employee_assigned)
+    Total_price = models.DecimalField(decimal_places=2, max_digits=30, null=True, blank=False)
     
     def __str__(self):
         return self.Equipment_name
