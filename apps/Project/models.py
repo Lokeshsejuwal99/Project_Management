@@ -43,21 +43,20 @@ class Project(models.Model):
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
     Milestones = models.ManyToManyField('Project.MileStone', blank=True)
     Dependencies = models.ManyToManyField('Project.Dependencies')
-    files = models.ManyToManyField('Project.File', related_name='projects')    
-
-    def __str__(self):
-        return self.Name
-
+    
     class Meta:
         ordering = ['Name']
 
-
-class File(models.Model):
-    Name = models.CharField(max_length=49, null=False, blank=True)
-    One_file = models.FileField(upload_to='uploads/', null=False, blank=True)
-
     def __str__(self):
         return self.Name
+
+
+class ProjectFile(models.Model):
+    project = models.IntegerField()
+    file = models.FileField(upload_to='uploads/', null=True, blank=True)
+
+    def __int__(self):
+        return self.project
 
 class MileStone(models.Model):
     Name = models.CharField(max_length=30)

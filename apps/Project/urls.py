@@ -1,5 +1,5 @@
 from django.urls import path, include
-from apps.Project.views import ProjectViewSet, ProjectTagViewSet, MileStoneViewSet, DependenciesViewSet, FilesAPIView, FilesAPIViewDetail
+from apps.Project.views import ProjectViewSet, ProjectTagViewSet, MileStoneViewSet, DependenciesViewSet
 from rest_framework.routers import DefaultRouter
 from . import views  
 
@@ -10,7 +10,5 @@ router.register('milestone', MileStoneViewSet, basename='milestone')
 router.register('dependencies', DependenciesViewSet, basename='dependencies')
 
 urlpatterns = [
-    path('', include(router.urls)),
-    path('files/', views.FilesAPIView.as_view()),
-    path('files/<pk>/', views.FilesAPIViewDetail.as_view())
+    path('', include(router.urls))
     ]

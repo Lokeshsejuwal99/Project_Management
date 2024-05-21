@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'multiupload',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -140,4 +141,5 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'Project_main.pagination.CustomPagination',  
     'PAGE_SIZE': 10,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
