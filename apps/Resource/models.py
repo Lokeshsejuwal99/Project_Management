@@ -1,8 +1,6 @@
 from django.db import models
 # from .publisher import publish_inventory_created_event
 # Create your models here.
-
-
 class Employee_assigned(models.Model):
     Employee_id = models.IntegerField()
     Employee_name = models.CharField(max_length=30)
