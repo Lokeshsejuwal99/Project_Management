@@ -10,5 +10,5 @@ router.register('milestone', MileStoneViewSet, basename='milestone')
 router.register('dependencies', DependenciesViewSet, basename='dependencies')
 
 urlpatterns = [
-    path('', include(router.urls
+    path('', include(router.urls))
     ]
