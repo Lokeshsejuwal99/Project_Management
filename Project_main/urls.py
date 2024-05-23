@@ -31,7 +31,7 @@ urlpatterns = [
     path('PM/swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('PM/redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('favicon.ico', RedirectView.as_view(url='/static/favicon.ico')),
-    path('', RedirectView.as_view(url='/PM/project/', permanent=True)), 
+    path('', RedirectView.as_view(url='/PM/project/', permanent=True)),
 ]
 
 urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

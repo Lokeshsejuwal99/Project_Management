@@ -139,7 +139,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'Project_main.pagination.CustomPagination',  
+    'DEFAULT_PAGINATION_CLASS': 'Project_main.pagination.CustomPagination',
     'PAGE_SIZE': 10,
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }

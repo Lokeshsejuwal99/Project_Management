@@ -58,6 +58,7 @@ class ProjectFile(models.Model):
     def __int__(self):
         return self.project
 
+
 class MileStone(models.Model):
     Name = models.CharField(max_length=30)
     Description = models.CharField(max_length=100)
@@ -70,7 +71,8 @@ class MileStone(models.Model):
     class Meta:
         ordering = ['Name']
 
-class Dependencies(models.Model): 
+
+class Dependencies(models.Model):
     # task_dependencies = models.ForeignKey('Task.Task', on_delete=models.CASCADE)
     Inventory_dependencies = models.ForeignKey('Resource.Inventory', on_delete=models.CASCADE)
     Equipment_dependencies = models.ForeignKey('Resource.Equipments', on_delete=models.CASCADE)

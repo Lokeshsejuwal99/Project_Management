@@ -2,7 +2,6 @@ from rest_framework.viewsets import ModelViewSet
 from Project_main.pagination import CustomPagination
 from apps.Project.models import Project, ProjectTag, MileStone, Dependencies
 from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer
-from .models import Project
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
@@ -45,7 +44,7 @@ class DependenciesViewSet(ModelViewSet):
     queryset = Dependencies.objects.all()
     serializer_class = DependenciesSerializer
     pagination_class = CustomPagination
-    filter_backends = [DjangoFilterBackend] 
+    filter_backends = [DjangoFilterBackend]
     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
     def create(self, request, *args, **kwargs):
@@ -53,8 +52,8 @@ class DependenciesViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_create(serializer)
         response_data = {
-            "message": "Object-created successfully", 
-            "data": serializer.data,
+            "message" : "Object-created successfully",
+            "data" : serializer.data,
         }
         return Response(response_data, status=201)
     
@@ -82,7 +81,7 @@ class DependenciesViewSet(ModelViewSet):
         serializer.is_valid(raise_exception=True)
         self.perform_update(serializer)
         return Response(
-            {"message": "Object-updated successfully", "data":serializer.data}
+            {"message": "Object-updated successfully", "data": serializer.data}
         )
     
     def destroy(self, request, *args, **kwargs):
@@ -109,7 +108,7 @@ class DependenciesViewSet(ModelViewSet):
 # class FilesAPIViewDetail(APIView):
 
 #     def get_object(self, pk):
-#         try: 
+#         try:
 #             return File.objects.get(pk=pk)
 #         except File.DoesNotExist:
 #             raise Http404

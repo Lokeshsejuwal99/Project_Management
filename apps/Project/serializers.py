@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from rest_framework import serializers 
+from rest_framework import serializers
 from apps.Project.models import (
     Project,
     ProjectTag,
@@ -77,7 +77,7 @@ class ProjectSerializer(ModelSerializer):
         instance.Dependencies.set(dependencies_data)
         instance.save()
 
-        #clear existing files and create new one
+        # clear existing files and create new one
         instance.project_files.all().delete()
         for file_data in project_files_data:
             ProjectFile.objects.create(project=instance, **file_data)

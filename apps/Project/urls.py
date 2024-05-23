@@ -1,7 +1,7 @@
 from django.urls import path, include
 from apps.Project.views import ProjectViewSet, ProjectTagViewSet, MileStoneViewSet, DependenciesViewSet
 from rest_framework.routers import DefaultRouter
-from . import views  
+from . import views
 
 router = DefaultRouter()
 router.register('project', ProjectViewSet, basename='project')
@@ -11,4 +11,4 @@ router.register('dependencies', DependenciesViewSet, basename='dependencies')
 
 urlpatterns = [
     path('', include(router.urls))
-    ]
+]

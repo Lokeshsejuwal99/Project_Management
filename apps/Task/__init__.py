@@ -46,12 +46,12 @@
 
 # def logger(func):
 #  def wrapper(*args, **kwargs):
-#   print(f'Expecting {func.__name__} with arguments of {args} and {kwargs}')       
+#   print(f'Expecting {func.__name__} with arguments of {args} and {kwargs}')
 #  return wrapper
 
 # @logger
 # def add(x, y, **kwargs):
-#  return x + y 
+#  return x + y
 
 # (add(5, 3, check=True, works=False, final='Kidding it works'))
 
@@ -71,7 +71,7 @@
 
 # smth =  [
  
-#   (2+3) * 4, 
+#   (2+3) * 4,
 #  (2+
 # ]
 # print(smth)

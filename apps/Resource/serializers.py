@@ -23,6 +23,6 @@ class EquipementsTSerializer(ModelSerializer):
 
 
 class BudgetSerializer(ModelSerializer):
-    class Meta: 
+    class Meta:
         model = Budget
         fields = "__all__"
