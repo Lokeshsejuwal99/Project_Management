@@ -73,3 +73,5 @@ class Budget(models.Model):
     Amount_in_words = models.CharField(max_length=400, null=False, blank=True)
     Payment_method = models.CharField(max_length=100, choices=pay_method)
     Date = models.DateTimeField(auto_now_add=True)
+
+    print('somthing to commit')
