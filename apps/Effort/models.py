@@ -14,5 +14,5 @@ class EffortCalculation(models.Model):
  notes = models.TextField()
 
  def add_dynamic_field(self, field_name, field_value):
-  self.dynamic_fields[field_name] = field_value
+  self.dynamic_fields[field_name] = field_value 
  
