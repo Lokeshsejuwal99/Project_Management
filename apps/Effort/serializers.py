@@ -12,6 +12,7 @@ class EffortCalculateSerializer(serializers.ModelSerializer):
     class Meta:
         model = EffortCalculation
         fields = ["task", "project", "start_time", "end_time", "notes", "remind"]
+        # fields = '__all__'
 
         def to_representation(self, instance):
             """Convert model objects to dictionery representation"""
@@ -19,8 +20,8 @@ class EffortCalculateSerializer(serializers.ModelSerializer):
             kathmandu_tz = pytz.timezone("Asia/Kathmandu")
             current_time = datetime.now(timezone.utc)
             converted_timezone = current_time.astimezone(kathmandu_tz)
-            current_time_str = converted_timezone.strftime("%Y-%M-%d %H-%M-%S")
-            current_time = datetime.strptime(current_time_str, "%Y-%M-%d %H-%M-%S")
+            current_time_str = converted_timezone.strftime("%Y-%m-%d %H:%M%z")
+            current_time = datetime.strptime(current_time_str, "%Y-%m-%d %H:%M%z")
 
             # Start/End time
             start_time = instance.start_time

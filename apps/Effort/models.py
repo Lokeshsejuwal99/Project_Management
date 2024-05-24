@@ -8,7 +8,7 @@ class EffortCalculation(models.Model):
  # user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
  task = models.ForeignKey(Task, on_delete=models.CASCADE)
  project = models.ForeignKey(Project, on_delete=models.CASCADE)
- start_time = models.DateTimeField(auto_now_add=True)
+ start_time = models.DateTimeField()
  end_time = models.DateTimeField()
  remind = models.CharField(max_length=100, blank=True)
  notes = models.TextField()

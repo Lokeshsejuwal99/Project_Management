@@ -28,14 +28,14 @@ class DependenciesSerializer(ModelSerializer):
 
 
 class ProjectSerializer(ModelSerializer):
-    project_files = serializers.ListField(child=serializers.FileField())
+    project_files = serializers.ListField(child=serializers.FileField(), allow_null=True, required=False)
 
     class Meta:
         model = Project
         fields = '__all__'
 
     def create(self, validated_data):
-        file_data = validated_data.pop('project_files')
+        file_data = validated_data.pop('project_files', None)
         for Filedata in file_data:
             ProjectFile.objects.create(project=1, file=Filedata)
         inventory_data = validated_data.pop("Inventory", [])
@@ -69,7 +69,6 @@ class ProjectSerializer(ModelSerializer):
         instance.Status - validated_data.get("Status", instance.Status)
         instance.Last_updated - validated_data.get("Last_updated", instance.Last_updated)
         instance.Start_date - validated_data.get("Start_date", instance.Start_date)
-
         instance.Inventory.set(inventory_data)
         instance.Equipments.set(equipments_data)
         instance.Assigned_members.set(assigned_members_data)
