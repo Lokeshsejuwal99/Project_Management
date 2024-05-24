@@ -9,6 +9,7 @@ INSTALLED_APPS_DEV = [
     "apps.Resource",
     "apps.Effort",
     "apps.Report",
+    "auth_mgmt",
 ]
 
 INSTALLED_APPS += INSTALLED_APPS_DEV
