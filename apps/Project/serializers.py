@@ -35,9 +35,9 @@ class ProjectSerializer(ModelSerializer):
         fields = '__all__'
 
     def create(self, validated_data):
-        file_data = validated_data.pop('project_files', None)
+        file_data = validated_data.pop('project_files', [])
         for Filedata in file_data:
-            ProjectFile.objects.create(project=1, file=Filedata)
+            ProjectFile.objects.create(project=project, file=Filedata)
         inventory_data = validated_data.pop("Inventory", [])
         equipments_data = validated_data.pop("Equipments", [])
         assigned_members_data = validated_data.pop("Assigned_members", [])
