@@ -12,14 +12,12 @@ class InventorySerializer(ModelSerializer):
     class Meta:
         model = Inventory
         fields = "__all__"
-        exclude = ("Total_price")
 
 
 class EquipementsTSerializer(ModelSerializer):
     class Meta:
         model = Equipments
         fields = "__all__"
-        exclude = ("Total_price")
 
 
 class BudgetSerializer(ModelSerializer):
