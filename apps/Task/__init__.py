@@ -76,10 +76,3 @@
 # ]
 # print(smth)
 
-def higherorderfunc(functionin, a, b):
- return functionin (a, b)
-
-def add(a, b):
- return a + b
-
-print(higherorderfunc(add, 2, 4))
