@@ -6,7 +6,13 @@ from apps.Project.models import (
     MileStone,
     Dependencies,
     ProjectFile,
+    WorkSpace
 )
+
+class WorkSpaceSerializer(ModelSerializer):
+    class Meta:
+        model = WorkSpace
+        fields = '__all__'
 
 
 class ProjectTagSerializer(ModelSerializer):

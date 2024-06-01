@@ -4,33 +4,42 @@ from multiupload.fields import MultiFileField
 # Create your models here.
 
 
+Priority = (
+    ("Low", "Low"),
+    ("Medium", "Medium"),
+    ("High", "High"),
+    ("Urgent", "Urgent"),
+)
+Status = (
+    ("Not Started", "Not Started"),
+    ("In Progress", "In Progress"),
+    ("Completed", "Completed"),
+    ("On Hold", "On Hold"),
+    ("Cancelled", "Cancelled"),
+    ("Overdue", "Overdue"),
+)
+
+
 class ProjectTag(models.Model):
-    name = models.CharField(max_length=30)
-    
+    Name = models.CharField(max_length=30)
+
     def __str__(self):
-        return self.name
+        return self.Name
 
+class WorkSpace(models.Model):
+    Workspace_name = models.CharField(max_length=100)
+    Priority = models.CharField(max_length=20, choices=Priority)
+    created_on = models.DateField(auto_now_add=True)
+    is_archive = models.BooleanField(default=False, null=True)
+    is_bookmarked = models.BooleanField(default=False, null=True)
 
+    def __str__(self):
+        return self.Workspace_name
+    
 class Project(models.Model):
     '''Models to represent a project plannigs.'''
-
-    Priority = (
-        ("Low", "Low"),
-        ("Medium", "Medium"),
-        ("High", "High"),
-        ("Urgent", "Urgent"),
-    )
-
-    Status = (
-        ("Not Started", "Not Started"),
-        ("In Progress", "In Progress"),
-        ("Completed", "Completed"),
-        ("On Hold", "On Hold"),
-        ("Cancelled", "Cancelled"),
-        ("Overdue", "Overdue"),
-    )
-
-    project_tag = models.ForeignKey(ProjectTag, on_delete=models.CASCADE)
+    WorkSpace = models.ForeignKey(WorkSpace, on_delete=models.CASCADE, null=True)
+    Project_tag = models.ForeignKey(ProjectTag, on_delete=models.CASCADE)
     Name = models.CharField(max_length=30)
     Description = models.CharField(max_length=700)
     Start_date = models.DateField(auto_now_add=True)
@@ -43,6 +52,8 @@ class Project(models.Model):
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
     Milestones = models.ManyToManyField('Project.MileStone', blank=True)
     Dependencies = models.ManyToManyField('Project.Dependencies')
+    is_archive = models.BooleanField(default=False, null=True)
+    is_bookmarked = models.BooleanField(default=False, null=True)
     
     class Meta:
         ordering = ['Name']

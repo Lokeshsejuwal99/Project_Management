@@ -1,7 +1,7 @@
 from rest_framework.viewsets import ModelViewSet
 from Project_main.pagination import CustomPagination
-from apps.Project.models import Project, ProjectTag, MileStone, Dependencies
-from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer
+from apps.Project.models import Project, ProjectTag, MileStone, Dependencies, WorkSpace
+from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer, WorkSpaceSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
@@ -10,8 +10,12 @@ from rest_framework.response import Response
 # Changeable Viewsets/Only for testing purposes
 
 
+class WWorkSpaceViewSet(ModelViewSet):
+    queryset = WorkSpace.objects.all()
+    serializer_class = WorkSpaceSerializer
+
 class ProjectTagViewSet(ModelViewSet):
-    queryset = ProjectTag.objects.order_by('name')
+    queryset = ProjectTag.objects.order_by('Name')
     serializer_class = ProjectTagSerializer
     pagination_class = CustomPagination
 
