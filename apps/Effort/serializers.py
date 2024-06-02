@@ -11,7 +11,7 @@ class EffortCalculateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = EffortCalculation
-        fields = ["task", "project", "start_time", "end_time", "notes", "remind"]
+        fields = ["task", "project", "start_time", "end_time", "notes", "remind",]
         # fields = '__all__'
 
         def to_representation(self, instance):
@@ -23,7 +23,7 @@ class EffortCalculateSerializer(serializers.ModelSerializer):
             current_time_str = converted_timezone.strftime("%Y-%m-%d %H:%M:%S%z")
             current_time = datetime.strptime(current_time_str, "%Y-%m-%d %H:%M:%S%z")
 
-            # Start/End time
+            # Start/End time        
             start_time = instance.start_time
             end_time = instance.end_time
             print("Start_time", start_time)

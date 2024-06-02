@@ -54,7 +54,7 @@ class Project(models.Model):
     Dependencies = models.ManyToManyField('Project.Dependencies')
     is_archive = models.BooleanField(default=False, null=True)
     is_bookmarked = models.BooleanField(default=False, null=True)
-    
+
     class Meta:
         ordering = ['Name']
 

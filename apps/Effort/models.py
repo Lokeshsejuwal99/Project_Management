@@ -10,7 +10,7 @@ class EffortCalculation(models.Model):
  project = models.ForeignKey(Project, on_delete=models.CASCADE)
  start_time = models.DateTimeField()
  end_time = models.DateTimeField()
- remind = models.CharField(max_length=100, blank=True)
+ remind = models.CharField(max_length=100)
  notes = models.TextField()
 
  def add_dynamic_field(self, field_name, field_value):
