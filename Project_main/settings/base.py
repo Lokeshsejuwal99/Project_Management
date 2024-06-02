@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'multiupload',
     'django_filters',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -64,8 +65,18 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Project_main.wsgi.application'
+# WSGI_APPLICATION = 'Project_main.wsgi.application'
+ASGI_APPLICATION = 'Project_main.asgi.application'
 
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
