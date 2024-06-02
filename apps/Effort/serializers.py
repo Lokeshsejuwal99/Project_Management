@@ -20,8 +20,8 @@ class EffortCalculateSerializer(serializers.ModelSerializer):
             kathmandu_tz = pytz.timezone("Asia/Kathmandu")
             current_time = datetime.now(timezone.utc)
             converted_timezone = current_time.astimezone(kathmandu_tz)
-            current_time_str = converted_timezone.strftime("%Y-%m-%d %H:%M:%S%z")
-            current_time = datetime.strptime(current_time_str, "%Y-%m-%d %H:%M:%S%z")
+            current_time_str = converted_timezone.strftime("%Y-%m-%d %H:%M%z")
+            current_time = datetime.strptime(current_time_str, "%Y-%m-%d %H:%M%z")
 
             # Start/End time        
             start_time = instance.start_time
@@ -54,3 +54,4 @@ class EffortCalculateSerializer(serializers.ModelSerializer):
                     representation["remind"] = f"{int(days)} days, and {int(hours)} hours {int(minutes)} minutes {int(seconds)} seconds left."
                     representation["remind"] = "On progress.."
             return representation
+    
