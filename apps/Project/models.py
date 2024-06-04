@@ -1,9 +1,6 @@
 from django.db import models
 from multiupload.fields import MultiFileField
 
-# Create your models here.
-
-
 Priority = (
     ("Low", "Low"),
     ("Medium", "Medium"),
@@ -18,7 +15,6 @@ Status = (
     ("Cancelled", "Cancelled"),
     ("Overdue", "Overdue"),
 )
-
 
 class ProjectTag(models.Model):
     Name = models.CharField(max_length=30)
@@ -35,9 +31,8 @@ class WorkSpace(models.Model):
 
     def __str__(self):
         return self.Workspace_name
-    
+
 class Project(models.Model):
-    '''Models to represent a project plannigs.'''
     WorkSpace = models.ForeignKey(WorkSpace, on_delete=models.CASCADE, null=True)
     Project_tag = models.ForeignKey(ProjectTag, on_delete=models.CASCADE)
     Name = models.CharField(max_length=30)
@@ -50,7 +45,7 @@ class Project(models.Model):
     Assigned_members = models.ManyToManyField('Resource.Employee_assigned')
     Status = models.CharField(max_length=20, choices=Status)
     Last_updated = models.DateField(auto_now_add=True, blank=True, null=True)
-    Milestones = models.ManyToManyField('Project.MileStone', blank=True)
+    Milestones = models.ManyToManyField('Project.MileStone', blank=True, related_name='project_milestone')
     Dependencies = models.ManyToManyField('Project.Dependencies')
     is_archive = models.BooleanField(default=False, null=True)
     is_bookmarked = models.BooleanField(default=False, null=True)
@@ -61,14 +56,12 @@ class Project(models.Model):
     def __str__(self):
         return self.Name
 
-
 class ProjectFile(models.Model):
     project = models.IntegerField()
     file = models.FileField(upload_to='uploads/', null=True, blank=True)
 
     def __int__(self):
         return self.project
-
 
 class MileStone(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
@@ -79,17 +72,14 @@ class MileStone(models.Model):
 
     def __str__(self):
         return self.Name
-    
+
     class Meta:
         ordering = ['Name']
 
-
 class Dependencies(models.Model):
     task_dependencies = models.ForeignKey('Task.Task', on_delete=models.CASCADE, null=True)
+    dependent_on = models.ForeignKey('Task.Task', related_name='dependents', on_delete=models.CASCADE, null=True)
     Inventory_dependencies = models.ForeignKey('Resource.Inventory', on_delete=models.CASCADE)
     Equipment_dependencies = models.ForeignKey('Resource.Equipments', on_delete=models.CASCADE)
     HR_dependencies = models.ForeignKey('Resource.Employee_assigned', on_delete=models.CASCADE)
     Buget_dependencies = models.ForeignKey('Resource.Budget', on_delete=models.CASCADE, null=True)
-
-    # def __int__(self):
-    #     return self.task_dependencies

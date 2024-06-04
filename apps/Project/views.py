@@ -1,16 +1,18 @@
 from rest_framework.viewsets import ModelViewSet
 from Project_main.pagination import CustomPagination
 from apps.Project.models import Project, ProjectTag, MileStone, Dependencies, WorkSpace
-from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer, WorkSpaceSerializer
+from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer, WorkSpaceSerializer, ProjectDetailSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
+from rest_framework.decorators import action
+
 # Create your views here.
 
 # Changeable Viewsets/Only for testing purposes
 
 
-class WWorkSpaceViewSet(ModelViewSet):
+class WorkSpaceViewSet(ModelViewSet):
     queryset = WorkSpace.objects.all()
     serializer_class = WorkSpaceSerializer
 
@@ -21,22 +23,14 @@ class ProjectTagViewSet(ModelViewSet):
 
 
 class ProjectViewSet(ModelViewSet):
-    queryset = Project.objects.all().order_by('Name')
+    queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    pagination_class = CustomPagination
-    
-    # def perform_create(self, serializer):
-    #     # Triggered when a new project is created
-    #     instance = serializer.save()
-    #     # Publish event to NATS when a new project is created
-    #     publish_inventory_created_event(instance)
 
-    # def perform_update(self, serializer):
-    #     # Triggered when a project is updated
-    #     instance = serializer.save()
-    #     # Publish event to NATS when a project is updated
-    #     publish_inventory_created_event(instance)
-
+    @action(detail=True, methods=['get'])
+    def detail(self, request, pk=None):
+        project = self.get_object()
+        serializer = ProjectDetailSerializer(project)
+        return Response(serializer.data)    
     
 class MileStoneViewSet(ModelViewSet):
     queryset = MileStone.objects.all().order_by('Name')
@@ -45,6 +39,7 @@ class MileStoneViewSet(ModelViewSet):
 
 
 class DependenciesViewSet(ModelViewSet):
+
     queryset = Dependencies.objects.all()
     serializer_class = DependenciesSerializer
     pagination_class = CustomPagination

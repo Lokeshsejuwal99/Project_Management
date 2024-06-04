@@ -35,19 +35,18 @@ class DependenciesSerializer(ModelSerializer):
         fields = "__all__"
 
 
-class ProjectSerializer(ModelSerializer):
+from rest_framework import serializers
+from .models import Project, ProjectFile, MileStone, Dependencies
+
+class ProjectSerializer(serializers.ModelSerializer):
     project_files = serializers.ListField(child=serializers.FileField(), allow_null=True, required=False)
-    tasks = TaskSerializer(many=True, read_only=True)
-    milestones = MileStoneSerializer(many=True, read_only=True)
-    
+
     class Meta:
         model = Project
         fields = '__all__'
 
     def create(self, validated_data):
         file_data = validated_data.pop('project_files', [])
-        for Filedata in file_data:
-            ProjectFile.objects.create(project=project, file=Filedata)
         inventory_data = validated_data.pop("Inventory", [])
         equipments_data = validated_data.pop("Equipments", [])
         assigned_members_data = validated_data.pop("Assigned_members", [])
@@ -55,6 +54,9 @@ class ProjectSerializer(ModelSerializer):
         dependencies_data = validated_data.pop("Dependencies", [])
 
         project = Project.objects.create(**validated_data)
+        for Filedata in file_data:
+            ProjectFile.objects.create(project=project.id, file=Filedata)
+        
         project.Inventory.set(inventory_data)
         project.Equipments.set(equipments_data)
         project.Assigned_members.set(assigned_members_data)
@@ -89,6 +91,13 @@ class ProjectSerializer(ModelSerializer):
         # clear existing files and create new one
         instance.project_files.all().delete()
         for file_data in project_files_data:
-            ProjectFile.objects.create(project=instance, **file_data)
+            ProjectFile.objects.create(project=instance.id, **file_data)
         return instance
-3
+
+class ProjectDetailSerializer(serializers.ModelSerializer):
+    tasks = TaskSerializer(many=True, read_only=True)
+    milestones = MileStoneSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Project
+        fields = "__all__"
