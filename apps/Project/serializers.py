@@ -1,5 +1,4 @@
 from rest_framework.serializers import ModelSerializer
-from apps.Task.serializers import TaskSerializer
 from rest_framework import serializers
 from apps.Project.models import (
     Project,
@@ -34,9 +33,6 @@ class DependenciesSerializer(ModelSerializer):
         model = Dependencies
         fields = "__all__"
 
-
-from rest_framework import serializers
-from .models import Project, ProjectFile, MileStone, Dependencies
 
 class ProjectSerializer(serializers.ModelSerializer):
     project_files = serializers.ListField(child=serializers.FileField(), allow_null=True, required=False)
@@ -94,10 +90,3 @@ class ProjectSerializer(serializers.ModelSerializer):
             ProjectFile.objects.create(project=instance.id, **file_data)
         return instance
 
-class ProjectDetailSerializer(serializers.ModelSerializer):
-    tasks = TaskSerializer(many=True, read_only=True)
-    milestones = MileStoneSerializer(many=True, read_only=True)
-    
-    class Meta:
-        model = Project
-        fields = "__all__"

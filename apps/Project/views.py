@@ -1,11 +1,15 @@
 from rest_framework.viewsets import ModelViewSet
+from rest_framework.views import APIView
 from Project_main.pagination import CustomPagination
+from apps.Task.models import Task, SubTask
 from apps.Project.models import Project, ProjectTag, MileStone, Dependencies, WorkSpace
-from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer, WorkSpaceSerializer, ProjectDetailSerializer
+from apps.Task.serializers import TaskSerializer, SubTaskSerializer
+from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer, WorkSpaceSerializer
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import action
+from rest_framework import status
 
 # Create your views here.
 
@@ -25,13 +29,9 @@ class ProjectTagViewSet(ModelViewSet):
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-
-    @action(detail=True, methods=['get'])
-    def detail(self, request, pk=None):
-        project = self.get_object()
-        serializer = ProjectDetailSerializer(project)
-        return Response(serializer.data)    
+    pagination_class = CustomPagination
     
+
 class MileStoneViewSet(ModelViewSet):
     queryset = MileStone.objects.all().order_by('Name')
     serializer_class = MileStoneSerializer
@@ -88,45 +88,47 @@ class DependenciesViewSet(ModelViewSet):
         self.perform_destroy(instance)
         return Response(status=201)
 
-# class FilesAPIView(APIView):
-#     parser_classes = (MultiPartParser, FormParser, JSONParser)
 
-#     def get(self, request, *args, **kwargs):
-#         files = File.objects.all()
-#         serializer = FileSerializer(files, many=True)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-    
-#     def post(self, request, *args, **kwargs):
-#         serializer = FileListSerializer(data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response({"message": "Files uploaded successfully"}, status=status.HTTP_201_CREATED)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class GanttChartViewSet(ModelViewSet):
+#     projects = Project.objects.all()
+#     tasks = Task.objects.all()
+#     dependencies = Dependencies.objects.all()
+#     milestones = MileStone.objects.all()
 
-        
-# class FilesAPIViewDetail(APIView):
 
-#     def get_object(self, pk):
-#         try:
-#             return File.objects.get(pk=pk)
-#         except File.DoesNotExist:
-#             raise Http404
-        
-#     def get(self, request, pk, format=None):
-#         file = self.get_object(pk)
-#         serializer = FileSerializer(file)
-#         return Response(serializer.data)
-    
-#     def put(self, request, pk, format=None):
-#         file = self.get_object(pk)
-#         serializer = FileSerializer(file, data=request.data)
-#         if serializer.is_valid():
-#             serializer.save()
-#             return Response(serializer.data)
-#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
-#     def delete(self, request, pk, format=None):
-#         file = self.get_object(pk)
-#         file.delete()
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-    
+class GanttChartViewSet(APIView):
+    def get(self, request):
+        """
+        Handles GET requests to retrieve combined data.
+
+        Returns:
+            Response object with serialized project data:
+                - projects (list): A list of serialized project objects.
+                - tasks (list): A list of serialized task objects.
+                - subtasks (list): A list of serialized subtaks objects.
+                - dependencies (list): A list of serialized dependency objects.
+                - milestones (list): A list of serialized milestone objects.
+        """
+
+        projects = Project.objects.all()
+        tasks = Task.objects.all()
+        subtasks = SubTask.objects.all()
+        dependencies = Dependencies.objects.all()
+        milestones = MileStone.objects.all()
+
+        # Serialize data using appropriate serializers
+        project_serializer = ProjectSerializer(projects, many=True)
+        task_serializer = TaskSerializer(tasks, many=True)
+        subtasks_serializer = SubTaskSerializer(subtasks, many=True)
+        dependency_serializer = DependenciesSerializer(dependencies, many=True)
+        milestone_serializer = MileStoneSerializer(milestones, many=True)
+
+        combined_data = {
+            'projects': project_serializer.data,
+            'tasks': task_serializer.data,
+            'subtasks': subtasks_serializer,
+            'dependencies': dependency_serializer.data,
+            'milestones': milestone_serializer.data,
+        }
+
+        return Response(combined_data, status=status.HTTP_200_OK)
