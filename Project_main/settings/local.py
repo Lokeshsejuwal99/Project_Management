@@ -14,7 +14,7 @@ INSTALLED_APPS_DEV = [
 
 INSTALLED_APPS += INSTALLED_APPS_DEV
 
-# Celery configuration for development   #update this to cloudamqp
+# Celery configuration for development   #update this to cloudamqp``
 CELERY_BROKER_URL = "amqp://guest:guest@localhost:5672/myvhost"
 CELERY_RESULT_BACKEND = "amqp://guest:guest@localhost:5672/myvhost"
 # CELERY_RESULT_BACKEND = "rabbitmq://localhost:5672/myvhost"

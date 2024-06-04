@@ -71,6 +71,7 @@ class ProjectFile(models.Model):
 
 
 class MileStone(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     Name = models.CharField(max_length=30)
     Description = models.CharField(max_length=100)
     Start_date = models.DateField(auto_now_add=True)
@@ -84,7 +85,7 @@ class MileStone(models.Model):
 
 
 class Dependencies(models.Model):
-    # task_dependencies = models.ForeignKey('Task.Task', on_delete=models.CASCADE)
+    task_dependencies = models.ForeignKey('Task.Task', on_delete=models.CASCADE, null=True)
     Inventory_dependencies = models.ForeignKey('Resource.Inventory', on_delete=models.CASCADE)
     Equipment_dependencies = models.ForeignKey('Resource.Equipments', on_delete=models.CASCADE)
     HR_dependencies = models.ForeignKey('Resource.Employee_assigned', on_delete=models.CASCADE)

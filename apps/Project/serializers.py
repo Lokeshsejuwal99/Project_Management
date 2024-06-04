@@ -1,4 +1,5 @@
 from rest_framework.serializers import ModelSerializer
+from apps.Task.serializers import TaskSerializer
 from rest_framework import serializers
 from apps.Project.models import (
     Project,
@@ -8,6 +9,7 @@ from apps.Project.models import (
     ProjectFile,
     WorkSpace
 )
+
 
 class WorkSpaceSerializer(ModelSerializer):
     class Meta:
@@ -35,7 +37,9 @@ class DependenciesSerializer(ModelSerializer):
 
 class ProjectSerializer(ModelSerializer):
     project_files = serializers.ListField(child=serializers.FileField(), allow_null=True, required=False)
-
+    tasks = TaskSerializer(many=True, read_only=True)
+    milestones = MileStoneSerializer(many=True, read_only=True)
+    
     class Meta:
         model = Project
         fields = '__all__'
@@ -87,3 +91,4 @@ class ProjectSerializer(ModelSerializer):
         for file_data in project_files_data:
             ProjectFile.objects.create(project=instance, **file_data)
         return instance
+3
