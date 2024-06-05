@@ -126,7 +126,7 @@ class GanttChartViewSet(APIView):
         combined_data = {
             'projects': project_serializer.data,
             'tasks': task_serializer.data,
-            'subtasks': subtasks_serializer,
+            'subtasks': subtasks_serializer.data,
             'dependencies': dependency_serializer.data,
             'milestones': milestone_serializer.data,
         }

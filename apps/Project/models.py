@@ -77,7 +77,7 @@ class MileStone(models.Model):
         ordering = ['Name']
 
 class Dependencies(models.Model):
-    task_dependencies = models.ForeignKey('Task.Task', on_delete=models.CASCADE, null=True)
+    task_dependencies = models.ForeignKey('Task.Task', on_delete=models.CASCADE, related_name='dependencies', null=True)
     dependent_on = models.ForeignKey('Task.Task', related_name='dependents', on_delete=models.CASCADE, null=True)
     Inventory_dependencies = models.ForeignKey('Resource.Inventory', on_delete=models.CASCADE)
     Equipment_dependencies = models.ForeignKey('Resource.Equipments', on_delete=models.CASCADE)
