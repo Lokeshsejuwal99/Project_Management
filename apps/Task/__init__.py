@@ -76,3 +76,13 @@
 # ]
 # print(smth)
 
+# def higherfuntion(numbers):
+#  def lowerfunc(xparam):
+#   return xparam - numbers
+#  return lowerfunc
+
+# double = higherfuntion(2)
+# trible = higherfuntion(3)
+
+# print(double(3))
+# print(trible(3))
