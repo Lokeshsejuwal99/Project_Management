@@ -27,4 +27,4 @@ class TaskSerializer(ModelSerializer):
             'Status',
             'Last_updated',
             'dependencies',
-        
+        ]

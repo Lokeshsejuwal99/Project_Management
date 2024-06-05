@@ -87,14 +87,14 @@
 # print(double(3))
 # print(trible(3))
 
-def process_large_args(*args):
-    print(f"Processing {len(args)} arguments")
-    # Example operation: Sum all arguments
-    total_sum = sum(args)
-    print(f"Total sum: {total_sum}")
+# def process_large_args(*args):
+#     print(f"Processing {len(args)} arguments")
+#     # Example operation: Sum all arguments
+#     total_sum = sum(args)
+#     print(f"Total sum: {total_sum}")
 
-# Creating the large list of arguments
-large_number_of_args = list(range(10000))
-print(large_number_of_args)
-# Passing the list to the function using *args
-process_large_args(*large_number_of_args)
+# # Creating the large list of arguments
+# process_large_args(list(range(100000)))
+
+# import os
+# print(os.listdir("."))
