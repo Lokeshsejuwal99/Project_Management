@@ -1,20 +1,17 @@
 from django.db import models
 from multiupload.fields import MultiFileField
 
-Priority = (
-    ("Low", "Low"),
-    ("Medium", "Medium"),
-    ("High", "High"),
-    ("Urgent", "Urgent"),
-)
-Status = (
-    ("Not Started", "Not Started"),
-    ("In Progress", "In Progress"),
-    ("Completed", "Completed"),
-    ("On Hold", "On Hold"),
-    ("Cancelled", "Cancelled"),
-    ("Overdue", "Overdue"),
-)
+Priority = (("Low", "Low"),
+            ("Medium", "Medium"),
+            ("High", "High"),
+            ("Urgent", "Urgent"))
+
+Status = (("Not Started", "Not Started"),
+          ("In Progress", "In Progress"),
+          ("Completed", "Completed"),
+          ("On Hold", "On Hold"),
+          ("Cancelled", "Cancelled"),
+          ("Overdue", "Overdue"))
 
 
 class ProjectTag(models.Model):

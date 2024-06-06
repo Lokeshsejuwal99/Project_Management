@@ -4,7 +4,7 @@ from apps.Project.serializers import DependenciesSerializer
 
 
 class SubTaskSerializer(ModelSerializer):
-    class Meta: 
+    class Meta:
         model = SubTask
         fields = '__all__'
 
