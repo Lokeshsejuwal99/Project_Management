@@ -1,21 +1,18 @@
 from django.db import models
 # Create your models here.
 
-Priority = (
-        ("Low", "Low"),
-        ("Medium", "Medium"),
-        ("High", "High"),
-        ("Urgent", "Urgent"),
-        )
+Priority = (("Low", "Low"),
+            ("Medium", "Medium"),
+            ("High", "High"),
+            ("Urgent", "Urgent"))
 
-Status = (
-        ("Not Started", "Not Started"),
-        ("In Progress", "In Progress"),
-        ("Completed", "Completed"),
-        ("On Hold", "On Hold"),
-        ("Cancelled", "Cancelled"),
-        ("Overdue", "Overdue"),
-        )
+Status = (("Not Started", "Not Started"),
+          ("In Progress", "In Progress"),
+          ("Completed", "Completed"),
+          ("On Hold", "On Hold"),
+          ("Cancelled", "Cancelled"),
+          ("Overdue", "Overdue"))
+
 
 class Task(models.Model):
     Project = models.ForeignKey('Project.Project', on_delete=models.CASCADE)
@@ -49,5 +46,3 @@ class SubTask(models.Model):
 
     def __str__(self):
         return self.Name
-
-

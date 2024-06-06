@@ -16,11 +16,13 @@ Status = (
     ("Overdue", "Overdue"),
 )
 
+
 class ProjectTag(models.Model):
     Name = models.CharField(max_length=30)
 
     def __str__(self):
         return self.Name
+
 
 class WorkSpace(models.Model):
     Workspace_name = models.CharField(max_length=100)
@@ -31,6 +33,7 @@ class WorkSpace(models.Model):
 
     def __str__(self):
         return self.Workspace_name
+
 
 class Project(models.Model):
     WorkSpace = models.ForeignKey(WorkSpace, on_delete=models.CASCADE, null=True)
@@ -56,12 +59,14 @@ class Project(models.Model):
     def __str__(self):
         return self.Name
 
+
 class ProjectFile(models.Model):
     project = models.IntegerField()
     file = models.FileField(upload_to='uploads/', null=True, blank=True)
 
     def __int__(self):
         return self.project
+
 
 class MileStone(models.Model):
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
@@ -75,6 +80,7 @@ class MileStone(models.Model):
 
     class Meta:
         ordering = ['Name']
+
 
 class Dependencies(models.Model):
     task_dependencies = models.ForeignKey('Task.Task', on_delete=models.CASCADE, related_name='dependencies', null=True)
