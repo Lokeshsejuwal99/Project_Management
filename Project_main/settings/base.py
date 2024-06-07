@@ -12,7 +12,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-z0$k8by75&b37580+cre0-g3fz#))qb2r(rkaoli6#lx(jy)ix'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# SECURITY WARNING : don't run with debug turned on in production!
 # DEBUG = True
 DEBUG = os.getenv('DEBUG', 'False').lower() in ('true', '1', 't')
 
@@ -49,7 +49,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Project_main.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -113,26 +112,23 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
 LANGUAGE_CODE = 'en-us'
-
 TIME_ZONE = 'UTC'
-
 USE_I18N = True
-
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
-
 STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
 
 # celery configuration
 CELERY_BROKER_URL = "amqp://guest:guest@localhost"
+
 CELERY_RESULT_BACKEND = "rpc://"
 
 NATS_SERVERS = ["nats://localhost:4222"]
@@ -140,7 +136,7 @@ NATS_SERVERS = ["nats://localhost:4222"]
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-
+ 
     os.path.join(BASE_DIR, '/static'),
 
 ]
@@ -149,9 +145,9 @@ MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
-
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'Project_main.pagination.CustomPagination',
     'PAGE_SIZE': 10,
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.IsAuthenticated'],
 }

@@ -25,7 +25,6 @@
 # smth = example(1,2,3,4)
 # print(smth)
 
-
 # def kwars(**kwargs):
 #  print(kwargs)
 
@@ -33,7 +32,7 @@
 
 # def check_kwargs(**kwargs):
 #  for key, value in kwargs.items():
-#   print(f'{key} = {value}')
+#  print(f'{key} = {value}')
 # check_kwargs(name='lokesh', age=21, city='KTM')
 
 # def check_both(*args, **kwargs):
@@ -41,7 +40,6 @@
 #  print(f'kwargs: {kwargs}')
 
 # check_both(1,2,3, a=5, b=6, c=7)
-
 # ''' Using Decorator in python '''
 
 # def logger(func):
@@ -98,5 +96,3 @@
 
 # import os
 # print(os.listdir("."))
-
-numb

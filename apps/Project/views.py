@@ -4,12 +4,14 @@ from Project_main.pagination import CustomPagination
 from apps.Task.models import Task, SubTask
 from apps.Project.models import Project, ProjectTag, MileStone, Dependencies, WorkSpace
 from apps.Task.serializers import TaskSerializer, SubTaskSerializer
-from apps.Project.serializers import ProjectSerializer, ProjectTagSerializer, MileStoneSerializer, DependenciesSerializer, WorkSpaceSerializer
+from apps.Project.serializers import (ProjectSerializer, ProjectTagSerializer,
+                                      MileStoneSerializer, DependenciesSerializer, WorkSpaceSerializer)
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
 from rest_framework.decorators import action
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
 
@@ -19,32 +21,37 @@ from rest_framework import status
 class WorkSpaceViewSet(ModelViewSet):
     queryset = WorkSpace.objects.all()
     serializer_class = WorkSpaceSerializer
+    permission_classes = [IsAuthenticated]
+
 
 class ProjectTagViewSet(ModelViewSet):
     queryset = ProjectTag.objects.order_by('Name')
     serializer_class = ProjectTagSerializer
     pagination_class = CustomPagination
+    permission_classes = [IsAuthenticated]
 
 
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     pagination_class = CustomPagination
+    permission_classes = [IsAuthenticated]
     
 
 class MileStoneViewSet(ModelViewSet):
     queryset = MileStone.objects.all().order_by('Name')
     serializer_class = MileStoneSerializer
     pagination_class = CustomPagination
+    permission_classes = [IsAuthenticated]
 
 
 class DependenciesViewSet(ModelViewSet):
-
     queryset = Dependencies.objects.all()
     serializer_class = DependenciesSerializer
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend]
     parser_classes = (MultiPartParser, FormParser, JSONParser)
+    permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -97,6 +104,8 @@ class DependenciesViewSet(ModelViewSet):
 
 
 class GanttChartViewSet(APIView):
+    permission_classes = [IsAuthenticated]
+
     def get(self, request):
         """
         Handles GET requests to retrieve combined data.
