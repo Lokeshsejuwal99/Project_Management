@@ -6,14 +6,7 @@ from apps.Project.models import (
     MileStone,
     Dependencies,
     ProjectFile,
-    WorkSpace
 )
-
-
-class WorkSpaceSerializer(ModelSerializer):
-    class Meta:
-        model = WorkSpace
-        fields = '__all__'
 
 
 class ProjectTagSerializer(ModelSerializer):
@@ -89,4 +82,3 @@ class ProjectSerializer(serializers.ModelSerializer):
         for file_data in project_files_data:
             ProjectFile.objects.create(project=instance.id, **file_data)
         return instance
-

@@ -2,10 +2,10 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.views import APIView
 from Project_main.pagination import CustomPagination
 from apps.Task.models import Task, SubTask
-from apps.Project.models import Project, ProjectTag, MileStone, Dependencies, WorkSpace
+from apps.Project.models import Project, ProjectTag, MileStone, Dependencies
 from apps.Task.serializers import TaskSerializer, SubTaskSerializer
 from apps.Project.serializers import (ProjectSerializer, ProjectTagSerializer,
-                                      MileStoneSerializer, DependenciesSerializer, WorkSpaceSerializer)
+                                      MileStoneSerializer, DependenciesSerializer)
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.parsers import MultiPartParser, FormParser, JSONParser
 from rest_framework.response import Response
@@ -14,14 +14,6 @@ from rest_framework import status
 from rest_framework.permissions import IsAuthenticated
 
 # Create your views here.
-
-# Changeable Viewsets/Only for testing purposes
-
-
-class WorkSpaceViewSet(ModelViewSet):
-    queryset = WorkSpace.objects.all()
-    serializer_class = WorkSpaceSerializer
-    permission_classes = [IsAuthenticated]
 
 
 class ProjectTagViewSet(ModelViewSet):
@@ -94,13 +86,6 @@ class DependenciesViewSet(ModelViewSet):
         instance = self.get_object()
         self.perform_destroy(instance)
         return Response(status=201)
-
-
-# class GanttChartViewSet(ModelViewSet):
-#     projects = Project.objects.all()
-#     tasks = Task.objects.all()
-#     dependencies = Dependencies.objects.all()
-#     milestones = MileStone.objects.all()
 
 
 class GanttChartViewSet(APIView):

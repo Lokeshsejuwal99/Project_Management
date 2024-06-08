@@ -21,6 +21,7 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
+    path('PM/workspace/', include('apps.WorkSpace.urls')),
     path('PM/project/', include('apps.Project.urls')),
     path('PM/task/', include('apps.Task.urls')),
     path('PM/resource/', include('apps.Resource.urls')),

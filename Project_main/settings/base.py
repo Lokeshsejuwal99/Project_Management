@@ -36,6 +36,12 @@ INSTALLED_APPS = [
     'multiupload',
     'django_filters',
     'channels',
+    'rest_framework.authtoken',
+    'rest_auth',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
 ]
 
 MIDDLEWARE = [
