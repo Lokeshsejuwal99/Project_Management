@@ -5,8 +5,8 @@ from rest_framework.viewsets import ModelViewSet
 from Project_main.pagination import CustomPagination
 from rest_framework.response import Response
 from rest_framework import status
-from .publisher import publish_inventory_created_event
 import asyncio
+from apps.Resource.publisher import publish_inventory_created, publish_inventory_deleted, publish_inventory_updated
 
 # Create your views here.
 
@@ -24,14 +24,56 @@ class InventoryViewSet(ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            self.perform_create(serializer)
-            # Trigger event after successfully creating the inventory item
-            asyncio.run(publish_inventory_created_event(request.data))
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
 
+        inventory_data = serializer.data
+
+        try:
+            asyncio.run(publish_inventory_created(inventory_data))
+        except Exception as e:
+            print(f'Error publishing inventory created event: {e}')
+
+        response_data = {
+            'message' : 'Inventory Created successfully.',
+            'data' : serializer.data,
+        }
+        return Response(response_data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        inventory_data = serializer.data
+        try:
+            asyncio.run(publish_inventory_updated(inventory_data))
+        except Exception as e:
+            print(f'Error: Error occured while updating inventory. {e}')
+        
+        return Response(
+            {
+                'message' : 'Inventory updated successfully. ',
+                'data' : serializer.data
+            }
+        )
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+
+        inventory_data = {
+            # 'id': instance.id,
+            # 'name': instance.Name,
+        }
+        try:
+            asyncio.run(publish_inventory_deleted(inventory_data))
+        except Exception as e:
+            print(f'Error: Error while deleting inventory data: {e}')
+        return Response('Inventory data is deleted.', status=status.HTTP_204_NO_CONTENT)
+    
 
 class EquipementsViewSet(ModelViewSet):
     queryset = Equipments.objects.all()

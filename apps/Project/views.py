@@ -20,21 +20,21 @@ class ProjectTagViewSet(ModelViewSet):
     queryset = ProjectTag.objects.order_by('Name')
     serializer_class = ProjectTagSerializer
     pagination_class = CustomPagination
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class ProjectViewSet(ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     pagination_class = CustomPagination
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
     
 
 class MileStoneViewSet(ModelViewSet):
     queryset = MileStone.objects.all().order_by('Name')
     serializer_class = MileStoneSerializer
     pagination_class = CustomPagination
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
 
 class DependenciesViewSet(ModelViewSet):
@@ -43,7 +43,7 @@ class DependenciesViewSet(ModelViewSet):
     pagination_class = CustomPagination
     filter_backends = [DjangoFilterBackend]
     parser_classes = (MultiPartParser, FormParser, JSONParser)
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -89,7 +89,7 @@ class DependenciesViewSet(ModelViewSet):
 
 
 class GanttChartViewSet(APIView):
-    permission_classes = [IsAuthenticated]
+    # permission_classes = [IsAuthenticated]
 
     def get(self, request):
         """
