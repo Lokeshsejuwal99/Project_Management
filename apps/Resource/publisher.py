@@ -34,13 +34,26 @@ async def publish_inventory_created(inventory_data):
     await publish_event("inventory.created", inventory_data)
 
 
-async def publish_inventory_updated(inventory_data):
-    print(f"Inventory.updated' event is published with data of: {inventory_data}")
-    await publish_event("inventory.updated", inventory_data)
+async def publish_inventory_updated(equipment_data):
+    print(f"Inventory.updated' event is published with data of: {equipment_data}")
+    await publish_event("inventory.updated", equipment_data)
 
 
-async def publish_inventory_deleted(inventory_data):
+async def publish_inventory_deleted(equipment_data):
     print("Inventory.deleted event is published successfully.")
-    await publish_event("inventory.deleted", inventory_data)
+    await publish_event("inventory.deleted", equipment_data)
 
  
+async def publish_equipment_created(equipment_data):
+    print(f"Equipment.created' event is published with data of: {equipment_data}")
+    await publish_event("inventory.created", equipment_data)
+
+
+async def publish_equipment_updated(equipment_data):
+    print(f"Equipment.updated' event is published with data of: {equipment_data}")
+    await publish_event("inventory.updated", equipment_data)
+
+
+async def publish_equipment_deleted(equipment_data):
+    print("Equipment.deleted event is published successfully.")
+    await publish_event("inventory.deleted", equipment_data)

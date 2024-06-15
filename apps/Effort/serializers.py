@@ -23,7 +23,7 @@ class EffortCalculateSerializer(serializers.ModelSerializer):
             current_time_str = converted_timezone.strftime("%Y-%m-%d %H:%M%z")
             current_time = datetime.strptime(current_time_str, "%Y-%m-%d %H:%M%z")
 
-            # Start/End time        
+            # Start/End time
             start_time = instance.start_time
             end_time = instance.end_time
             print("Start_time", start_time)

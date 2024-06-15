@@ -11,6 +11,7 @@ class TaskViewSet(ModelViewSet):
     serializer_class = TaskSerializer
     pagination_class = CustomPagination
 
+
 class SubTaskViewSet(ModelViewSet):
     queryset = SubTask.objects.all()
     serializer_class = SubTaskSerializer

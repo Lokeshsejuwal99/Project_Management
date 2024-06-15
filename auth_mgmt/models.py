@@ -16,7 +16,7 @@
 #   user = self.model(email=email, **extra_fields)
 #   user.set_password(password)
 #   user.save(using=self._db)
-#   return user 
+#   return user
  
 #  def create_superuser(self, email, password, **extra_fields):
 #   '''This is custom superuser'''
@@ -30,7 +30,7 @@
 #   user = self.model(email=email, **extra_fields)
 #   user.set_password(password)
 #   user.save(using=self._db)
-#   return user 
+#   return user
  
 
 # class CustomUser(AbstractBaseUser, PermissionsMixin):
