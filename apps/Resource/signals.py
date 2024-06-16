@@ -2,7 +2,7 @@ import asyncio
 from django.http import HttpResponse
 # inventory/views.py or inventory/signals.py
 from .models import Inventory
-from .publisher import publish_inventory_created_event
+from .nats_publisher import publish_inventory_created_event
 
 
 def create_inventory(request):

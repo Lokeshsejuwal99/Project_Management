@@ -6,7 +6,7 @@ from Project_main.pagination import CustomPagination
 from rest_framework.response import Response
 from rest_framework import status
 import asyncio
-from apps.Resource.publisher import publish_inventory_created, publish_inventory_deleted, publish_inventory_updated
+from apps.Resource.nats_publisher import publish_inventory_created, publish_inventory_deleted, publish_inventory_updated, publish_equipment_created, publish_equipment_updated, publish_equipment_deleted
 
 # Create your views here.
 
@@ -79,6 +79,58 @@ class EquipementsViewSet(ModelViewSet):
     queryset = Equipments.objects.all()
     serializer_class = EquipementsTSerializer
     pagination_class = CustomPagination
+
+
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        equipment_data = serializer.data
+
+        try:
+            asyncio.run(publish_equipment_created(equipment_data))
+        except Exception as e:
+            print(f'Error publishing equipment created event: {e}')
+
+        response_data = {
+            'message' : 'Equipment Created successfully.',
+            'data' : serializer.data,
+        }
+        return Response(response_data, status=status.HTTP_201_CREATED)
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)
+        instance = self.get_object()
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)
+
+        equipment_data = serializer.data
+        try:
+            asyncio.run(publish_equipment_updated(equipment_data))
+        except Exception as e:
+            print(f'Error: Error occured while updating equipment. {e}')
+        
+        return Response(
+            {
+                'message' : 'Equipment updated successfully. ',
+                'data' : serializer.data
+            }
+        )
+
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+
+        equipment_data = {
+            'id': instance.id,
+            'name': instance.Name,
+        }
+        try:
+            asyncio.run(publish_equipment_deleted(equipment_data))
+        except Exception as e:
+            print(f'Error: Error while deleting equipment data: {e}')
+        return Response('Equipment data is deleted.', status=status.HTTP_204_NO_CONTENT)
     
 
 class BudgetViewSet(ModelViewSet):

@@ -30,12 +30,12 @@ async def publish_event(subject, data):
  
 
 async def publish_inventory_created(inventory_data):
-    print(f"Inventory.created' event is published with data of: {inventory_data}")
+    print(f"Inventory.created' event is published with data: {inventory_data}")
     await publish_event("inventory.created", inventory_data)
 
 
 async def publish_inventory_updated(equipment_data):
-    print(f"Inventory.updated' event is published with data of: {equipment_data}")
+    print(f"Inventory.updated' event is published with data: {equipment_data}")
     await publish_event("inventory.updated", equipment_data)
 
 
@@ -45,12 +45,12 @@ async def publish_inventory_deleted(equipment_data):
 
  
 async def publish_equipment_created(equipment_data):
-    print(f"Equipment.created' event is published with data of: {equipment_data}")
+    print(f"Equipment.created' event is published with data: {equipment_data}")
     await publish_event("inventory.created", equipment_data)
 
 
 async def publish_equipment_updated(equipment_data):
-    print(f"Equipment.updated' event is published with data of: {equipment_data}")
+    print(f"Equipment.updated' event is published with data: {equipment_data}")
     await publish_event("inventory.updated", equipment_data)
 
 
