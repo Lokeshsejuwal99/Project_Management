@@ -93,7 +93,7 @@ class EquipementsViewSet(ModelViewSet):
             print(f'Error publishing equipment created event: {e}')
 
         response_data = {
-            'message' : 'Equipment Created successfully.',
+            'message' : 'Equipment Created successfully.', 
             'data' : serializer.data,
         }
         return Response(response_data, status=status.HTTP_201_CREATED)
