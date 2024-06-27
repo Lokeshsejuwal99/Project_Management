@@ -1,7 +1,19 @@
 from rest_framework.serializers import ModelSerializer
 from apps.Task.models import Task, SubTask
-from apps.Project.serializers import DependenciesSerializer
+from apps.Project.serializers import DependenciesSerializer, MileStoneSerializer
+# from apps.Project. import MileStone, Dependencies
 
+
+# class MilestoneSerializer(ModelSerializer):
+#     class Meta:
+#         model = MileStone
+#         fields = '__all__'
+
+
+# class DependenciesSerializer(ModelSerializer):
+#     class Meta:
+#         model = Dependencies
+#         fields = '__all__'
 
 class SubTaskSerializer(ModelSerializer):
     class Meta:
@@ -10,8 +22,9 @@ class SubTaskSerializer(ModelSerializer):
 
 
 class TaskSerializer(ModelSerializer):
-    dependencies = DependenciesSerializer(many=True)
-    
+    subtask = SubTaskSerializer(many=True, read_only=True)
+    milestones = MileStoneSerializer(many=True, read_only=True)
+    dependencies = DependenciesSerializer(many=True, read_only=True)
     class Meta:
         model = Task
         fields = [
@@ -27,4 +40,8 @@ class TaskSerializer(ModelSerializer):
             'Status',
             'Last_updated',
             'dependencies',
+            'dependencies',
+            'milestones',
+            'subtask'
         ]
+
