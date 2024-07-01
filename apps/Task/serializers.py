@@ -15,6 +15,7 @@ class DependenciesSerializer(ModelSerializer):
         fields = '__all__'
         ref_name = 'TaskAppDependencies'
 
+
 class SubTaskSerializer(ModelSerializer):
     class Meta:
         model = SubTask
@@ -42,6 +43,4 @@ class TaskSerializer(ModelSerializer):
             'Last_updated',
             'dependencies',
             'milestones',
-            'subtask'
-        ]
-
+            'subtask']

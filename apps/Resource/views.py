@@ -6,7 +6,8 @@ from Project_main.pagination import CustomPagination
 from rest_framework.response import Response
 from rest_framework import status
 import asyncio
-from apps.Resource.nats_publisher import publish_inventory_created, publish_inventory_deleted, publish_inventory_updated, publish_equipment_created, publish_equipment_updated, publish_equipment_deleted
+from apps.Resource.nats_publisher import (publish_inventory_created, publish_inventory_deleted, publish_inventory_updated,
+                                          publish_equipment_created, publish_equipment_updated, publish_equipment_deleted)
 
 # Create your views here.
 
@@ -80,7 +81,6 @@ class EquipementsViewSet(ModelViewSet):
     serializer_class = EquipementsTSerializer
     pagination_class = CustomPagination
 
-
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -93,7 +93,7 @@ class EquipementsViewSet(ModelViewSet):
             print(f'Error publishing equipment created event: {e}')
 
         response_data = {
-            'message' : 'Equipment Created successfully.', 
+            'message' : 'Equipment Created successfully.',
             'data' : serializer.data,
         }
         return Response(response_data, status=status.HTTP_201_CREATED)
