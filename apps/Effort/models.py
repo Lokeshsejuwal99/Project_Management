@@ -1,6 +1,7 @@
 from django.db import models
 from apps.Task.models import Task
 from apps.Project.models import Project
+
 # from auth_mgmt.models import CustomUser
 # Create your models here.
 
@@ -16,4 +17,3 @@ class EffortCalculation(models.Model):
 
     def add_dynamic_field(self, field_name, field_value):
         self.dynamic_fields[field_name] = field_value
- 

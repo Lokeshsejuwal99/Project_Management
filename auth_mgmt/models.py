@@ -1,53 +1,47 @@
-# from django.db import models
-# from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, UserManager, PermissionsMixin
-# from django.utils import timezone
-# # Create your models here.
+from django.db import models
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+import uuid 
+
+class AuditableModel(models.Model):
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        abstract = True
 
 
-# class UserManager(models.Model):
-#  '''This is custom user manager'''
+class Permission(AuditableModel):
+    name = models.CharField(max_length=250)
 
-#  def create_user(self, email, password, **extra_fields):
-#   if not email:
-#    raise ValueError("Email is a required field.")
-#   email = self.normalize_email(email)
-#   extra_fields.setdefault("is_staff", False)
-#   extra_fields.setdefault("is_superuser", False)
-#   user = self.model(email=email, **extra_fields)
-#   user.set_password(password)
-#   user.save(using=self._db)
-#   return user
- 
-#  def create_superuser(self, email, password, **extra_fields):
-#   '''This is custom superuser'''
+    def __str__(self):
+        return f"{self.name}"
 
-#   if not email:
-#    raise ValueError("Email is a required field")
-#   extra_fields.setdefault("is_staff", True)
-#   extra_fields.setdefault("is_superuser", True)
-#   extra_fields.setdefault("is_active", True)
-#   email = self.normalize_email(email)
-#   user = self.model(email=email, **extra_fields)
-#   user.set_password(password)
-#   user.save(using=self._db)
-#   return user
- 
+class Role(AuditableModel):
+    name = models.CharField(max_length=100, unique=True)
+    permissions = models.ManyToManyField(Permission)
 
-# class CustomUser(AbstractBaseUser, PermissionsMixin):
-#  '''This is my custom MyUser subclass of AbstractBaseUser'''
+    def __str__(self):
+        return f"{self.name}"
 
-#  email = models.EmailField(max_length=254, unique=True)
-#  recovery_code = models.TextField()
-#  mfa_enabled = models.BooleanField(default=False)
-#  otp = models.CharField(max_length=6, blank=True, null=True)
-#  is_active = models.BooleanField(default=True)
-#  is_superuser = models.BooleanField(default=False)
-#  date_joined = models.DateTimeField(default=timezone.now)
-#  last_update = models.DateTimeField(auto_now=True)
 
-#  USERNAME_FIELD = "email"
-#  objects = UserManager()
-
-#  def __str__(self):
-#   return self.email
- 
+class User(AbstractBaseUser, PermissionsMixin):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    email = models.EmailField(("email address"), null=True, blank=True, unique=True)
+    password = models.CharField(max_length=255, null=True)
+    firstname = models.CharField(max_length=255, blank=True, null=True)
+    lastname = models.CharField(max_length=255, blank=True, null=True)
+    image = models.FileField(upload_to="users/", blank=True, null=True)
+    phone_number = models.CharField(max_length=17, blank=True, null=True)
+    failed_login_attempts = models.IntegerField(default=0)
+    is_locked = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_active = models.BooleanField(default=False)
+    is_admin = models.BooleanField(default=False)
+    last_login = models.DateTimeField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    verified = models.BooleanField(default=False)
+    USERNAME_FIELD = "email"
+    REQUIRED_FIELDS = []
+    objects = CustomUserManager()
+    roles = models.ManyToManyField(Role)
