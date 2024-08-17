@@ -6,7 +6,7 @@ The Project Management Backend is a web application backend developed using Djan
 
 ## Repository Link
 
-[GitHub Repository](https://github.com/yourusername/project-management-backend)
+[GitHub Repository](https://github.com/Lokeshsejuwal99/Project_Management)
 
 ## Purpose and Goals
 
@@ -35,3 +35,43 @@ The Project Management Backend is a web application backend developed using Djan
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/lokeshsejuwal99/Project_Management.git
+
+
+2. **Navigate to the Project Directory**:
+   ```bash
+   cd Project_Management
+
+
+3. **Create a Virtual Environment (Optional but recommended)**:
+   ```bash
+   python -m venv venv
+
+4. **Activate the Virtual Environment**:
+* on windows:
+     ```bash
+  venv\Scripts\activate
+
+* On macOS/Linux:
+    ```bash
+  source venv/bin/activate
+
+5. **Install Dependencies**:
+   ``` bash
+   pip install -r requirements.txt
+
+
+6. **Apply Migrations**:
+   ``` bash
+   python manage.py makemigrations
+   python manage.py migrate
+   
+6. **Create a Superuser (For accessing the Django admin)**:
+   ``` bash
+   python manage.py createsuperuser
+
+7. **Run the Development Server**:
+   ``` bash
+   python manage.py runserver
+
+8. **Access the Application**:
+   Open your browser and go to http://127.0.0.1:8000 to access the API.
